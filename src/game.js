@@ -9,14 +9,6 @@ Game = {
 			.color('green');
 
 		Crafty.e('Ground')
-			.attr({x: 600, y: 300, w: 100, h: 50})
-			.color('green');
-
-		Crafty.e('Ground')
-			.attr({x: 0, y:350, w: 1000, h: 50})
-			.color('green');
-
-		Crafty.e('Ground')
 			.attr({x: 0, y:350, w: 1000, h: 50})
 			.color('green');
 		  
@@ -28,6 +20,9 @@ Game = {
 
 	  	Crafty.e('Enemy')
 	  		.attr({x: 200, y: 200})
+
+	  	Crafty.e('Boy')
+	  		.attr({x: 100, y: 200})
 
 	  	Crafty.e('Portal')
 	  		.attr({x: 100, y: 200})
