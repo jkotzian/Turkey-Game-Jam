@@ -51,6 +51,9 @@ Crafty.c('Player2' , {
 		    	this.stopMovement();
 			}
 	    })
+		.bind('Death2', function(e) {
+			this.destroy()
+		})
 	},
 
 	portalize: function() {
