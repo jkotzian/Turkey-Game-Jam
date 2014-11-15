@@ -11,17 +11,43 @@ Crafty.scene('Level_1', function() {
 		}
 	}
 	  
-	Crafty.e('Player1')
+	var player1 = Crafty.e('Player1')
 	  	.attr({x: 0, y: 299})
 
-  	Crafty.e('Player2')
+  	var player2 = Crafty.e('Player2')
   		.attr({x: 100, y: 299})
 
+  	player1Door = false;
+	player2Door = false;
+
+	player1.bind('KeyDown', function(e) {
+		console.log(player1Door)
+	    if(e.key == Crafty.keys.ENTER && player1Door == false) {
+	        console.log("yo")
+	        this.portalize();
+	    }
+	    else if(e.key == Crafty.keys.ENTER && player1Door == true) {
+	        console.log("yo")
+	        this.unportalize1();
+	    }
+    });
+
+    player2.bind('KeyDown', function(e) {
+    	console.log("yo2")
+        if(e.key == Crafty.keys.Q && player2Door == false) {
+            console.log("yo")
+            this.portalize();
+        }
+        else if(e.key == Crafty.keys.Q && player2Door == true) {
+            console.log("yo")
+            this.unportalize2();
+        }
+    });
   	// Crafty.e('Enemy')
   	// 	.attr({x: 200, y: 200})
 
-  	Crafty.e('Boy')
-  		.attr({x: 100, y: 200})
+  	// Crafty.e('Boy')
+  	// 	.attr({x: 100, y: 200})
 
   	Crafty.e('Portal')
   		.attr({x: 100, y: 200})
