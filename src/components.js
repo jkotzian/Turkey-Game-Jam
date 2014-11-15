@@ -16,13 +16,35 @@ Crafty.c('Ground', {
 	},
 });
 
+Crafty.c('Door1', {
+	init: function() {
+		this.requires('Actor, Color')
+			.color('black')
+			.attr({w: 50, h:100});
+	},
+});
+
 Crafty.c('Player' , {
 	init: function() {
-		this.requires('2D, Canvas, Color, Fourway, Gravity') 
-		  .attr({x: 0, y: 0, w: 50, h: 50})
-		  .color('#F00')
-		  .fourway(4)
-		  .gravity('Floor');
+		this.requires('2D, Canvas, Color, Gravity') 
+		  .attr({w: 50, h: 50})
+		  //.twoway(4)
+		  .gravity('Ground')
+		  .gravityConst(.5);
 	}
 });
-		  
+
+Crafty.c('Player1' , {
+	init: function() {
+		this.requires('Player, Multiway')
+		  .attr({x: 0, y: 0})
+		  .color('red')
+		  .multiway(10, {
+			UP_ARROW: -90,
+			LEFT_ARROW: 180,
+			RIGHT_ARROW: 0,
+		  })
+		  .gravity('Ground')
+		  .gravityConst(.5);
+	}
+});
