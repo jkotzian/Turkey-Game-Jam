@@ -1,5 +1,5 @@
 Crafty.c('Boy', { 
-	speed: .6,
+	speed: 3,
 	direction: 1,
 	init: function() {
 		this.requires('2D, Canvas, Color, Gravity, Collision, Boy')
@@ -13,11 +13,16 @@ Crafty.c('Boy', {
 		.collideHazard()
 		.bind("EnterFrame", function() {
 			//Move the enemy in the game loop
-			//If it hits the edge of the screen
-			if (this.x > Crafty.viewport.width - this.w ||
-				this.x < 0){
-				//Switch directions
+			//If he hits the left edge of the screen
+			if (this.x < 0) {
+				//Reverse direction
 				this.direction *= -1;
+			}
+			//If he hits the right edge of the screen
+			if (this.x > Crafty.viewport.width - this.w) {
+				console.log("OH HAI")
+				//Go to the next room
+				this.reachedEnd();
 			}
 			//Right
 			if (this.direction == 1) {
@@ -30,6 +35,10 @@ Crafty.c('Boy', {
 		})
 	},
 
+	reachedEnd: function() {
+		//Trigger the callback to go to the next level
+		Crafty.trigger('NextLevel', this);
+	},
 	collideHazard: function() {
 		this.onHit('Hazard', this.boyDie)
 		return this;
