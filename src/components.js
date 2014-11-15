@@ -16,6 +16,14 @@ Crafty.c('Ground', {
 	}
 });
 
+Crafty.c('Portal', {
+	init: function() {
+		this.requires('Actor, Color, Portal')
+			.color('blue')
+			.attr({x: 100, y: 100, w: 50, h: 50});
+	}
+})
+
 Crafty.c('Player1' , {
 	init: function() {
 		this.requires('2D, Canvas, Color, Multiway, Gravity, Collision, Solid')
@@ -28,10 +36,22 @@ Crafty.c('Player1' , {
 		})
 		.gravity('Solid')
 		.gravityConst(.3)
-		.stopOnSolids();
+		.stopOnSolids()
+		.collidePortal();
 	},
 
-	 // Registers a stop-movement function to be called when
+	collidePortal: function() {
+	 	console.log('teleport!')
+	 	this.onHit('Portal', this.teleport)
+	 	return this;
+	},
+
+	teleport: function() {
+		console.log('Hell yeah!');
+		this.x = 0;
+		this.y = 0;
+	},
+	// Registers a stop-movement function to be called when
 	// this entity hits an entity with the "Solid" component
 	stopOnSolids: function() {
 		console.log('Hey!');

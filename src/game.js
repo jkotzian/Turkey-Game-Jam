@@ -17,5 +17,8 @@ Game = {
 
 	  	Crafty.e('Player2')
 	  		.attr({x: 100, y: 299})
+
+	  	Crafty.e('Portal')
+	  		.attr({x: 100, y: 200})
 	}
  }
