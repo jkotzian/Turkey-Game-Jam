@@ -13,7 +13,7 @@ Crafty.c('Player1' , {
 		})
 		.gravity('Solid')
 		.gravityConst(.3)
-		// .stopOnSolids()
+		.stopOnSolids()
 		.collidePortal()
 		.bind('KeyDown', function(e) {
 		    if(e.key == Crafty.keys.M) {
@@ -26,7 +26,6 @@ Crafty.c('Player1' , {
 		    }
 	    })
 	    .bind('EnterFrame', function(frame) {
-	    	console.log(this.keyDown)
 	    	if (this.keyDown && this.open == false) {
 	    		this.portalize();
 	    	}
@@ -35,11 +34,7 @@ Crafty.c('Player1' , {
 	    	}
 	    	//If the door is open, stop it from moving
 	    	if (this.open) {
-		    	this._speed = 0;
-				if (this._movement) {
-					this.x -= this._movement.x;
-					this.y -= this._movement.y;
-				}
+		    	this.stopMovement();
 			}
 	    })
 	},
@@ -60,26 +55,26 @@ Crafty.c('Player1' , {
 		this.open = true;
 	},
 
-	unportalize1: function() {
+	unportalize: function() {
 		this.color('red')
 		this.gravity("Ground")
 		this.keyDown = false
 		this.open = false;
-	}
-	// // Registers a stop-movement function to be called when
-	// // this entity hits an entity with the "Solid" component
-	// stopOnSolids: function() {
-	// 	this.onHit('Solid', this.stopMovement);
-	// 	return this;
-	// },
+	},
+	// Registers a stop-movement function to be called when
+	// this entity hits an entity with the "Solid" component
+	stopOnSolids: function() {
+		this.onHit('Solid', this.stopMovement);
+		return this;
+	},
 
-	// // Stops the movement
-	// stopMovement: function() {
-	// 	console.log('HI!');
-	// 	this._speed = 0;
-	// 	if (this._movement) {
-	// 		this.x -= this._movement.x;
-	// 		this.y -= this._movement.y;
-	// 	}
-	// },
+	// Stops the movement
+	stopMovement: function() {
+		console.log('HI!');
+		this._speed = 0;
+		if (this._movement) {
+			this.x -= this._movement.x;
+			this.y -= this._movement.y;
+		}
+	},
 });
