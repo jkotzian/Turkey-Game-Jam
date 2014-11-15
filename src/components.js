@@ -3,6 +3,11 @@
 // An "Actor" is an entity that is drawn in 2D on canvas
 //  via our logical coordinate grid
 
+portalCount = 0
+
+player1Door = false;
+player2Door = false;
+
 Crafty.c('Actor', {
     init: function() {
         this.requires('2D, Canvas, Grid');
@@ -16,92 +21,112 @@ Crafty.c('Ground', {
 	}
 });
 
-Crafty.c('Portal', {
-	init: function() {
-		this.requires('Actor, Color, Portal')
-			.color('blue')
-			.attr({x: 100, y: 100, w: 50, h: 50});
-	}
-})
-
 Crafty.c('Player1' , {
 	init: function() {
-		this.requires('2D, Canvas, Color, Multiway, Gravity, Collision, Solid')
-		.attr({x: 0, y: 0, w: 50, h: 50})
+		this.requires('2D, Canvas, Color, Multiway, Gravity, Collision')
+		.attr({x: 0, y: 0, w: 30, h: 50})
 		.color('red')
 		.multiway(7, {
 			UP_ARROW: -90,
 			LEFT_ARROW: 180,
 			RIGHT_ARROW: 0,
 		})
-		.gravity('Solid')
+		.gravity('Ground')
 		.gravityConst(.3)
-		.stopOnSolids()
 		.collidePortal();
 	},
 
 	collidePortal: function() {
 	 	console.log('teleport!')
-	 	this.onHit('Portal', this.teleport)
+	 	this.onHit('Player2', this.teleport)
 	 	return this;
-	},
+	},  
 
 	teleport: function() {
-		console.log('Hell yeah!');
-		this.x = 0;
-		this.y = 0;
+		if (player2Door == true) {
+			console.log('Hell yeah!');
+			this.x = 0;
+			this.y = 0;
+		}
 	},
 	// Registers a stop-movement function to be called when
 	// this entity hits an entity with the "Solid" component
-	stopOnSolids: function() {
-		console.log('Hey!');
-		this.onHit('Solid', this.stopMovement);
-		return this;
+
+	portalize: function() {
+		this.requires('')
+			.color('yellow')
+			.multiway(0, {A:0})
+			.antigravity();
+		player1Door = true;
 	},
 
-	// Stops the movement
-	stopMovement: function() {
-		console.log('HI!');
-		this._speed = 0;
-		if (this._movement) {
-			this.x -= this._movement.x;
-			this.y -= this._movement.y;
-		}
-	},
-});
-
-Crafty.c('Player2' , {
-	init: function() {
-		this.requires('2D, Canvas, Color, Multiway, Gravity, Collision, Solid')
-		.attr({x: 0, y: 0, w: 50, h: 50})
+	unportalize1: function() {
+		console.log('1');
+		this.requires('2D, Canvas, Color, Multiway, Gravity, Collision')
 		.color('red')
 		.multiway(7, {
 			W: -90,
 			A: 180,
 			D: 0,
 		})
-		.gravity('Solid')
+		.gravity("Ground"); 
+		player1Door = false;
+	}
+});
+
+Crafty.c('Player2' , {
+
+	init: function() {
+		this.requires('2D, Canvas, Color, Multiway, Gravity, Collision')
+		.attr({x: 0, y: 0, w: 30, h: 50})
+		.color('blue')
+		.multiway(7, {
+			W: -90,
+			A: 180,
+			D: 0,
+		})
+		.gravity('Ground')
 		.gravityConst(.3)
-		.stopOnSolids();
+		.collidePortal();
+	},
+
+	collidePortal: function() {
+	 	console.log('teleport!')
+	 	this.onHit('Player1', this.teleport)
+	 	return this;
+	},  
+
+	teleport: function() {
+		if (player1Door == true) {
+			console.log('Hell yeah!');
+			this.x = 0;
+			this.y = 0;
+		}
 	},
 
 	 // Registers a stop-movement function to be called when
 	// this entity hits an entity with the "Solid" component
-	stopOnSolids: function() {
-		console.log('Hey!');
-		this.onHit('Solid', this.stopMovement);
-		return this;
+
+	portalize: function() {
+		this.requires('')
+			.color('yellow')
+			.multiway(0, {A:0})
+			.antigravity();
+		player2Door = true;
 	},
 
-	// Stops the movement
-	stopMovement: function() {
-		console.log('HI!');
-		this._speed = 0;
-		if (this._movement) {
-			this.x -= this._movement.x;
-			this.y -= this._movement.y;
-		}
-	},
+	unportalize2: function() {
+		console.log('2');
+		this.requires('2D, Canvas, Color, Multiway, Gravity, Collision')
+		.color('blue')
+		.multiway(7, {
+			W: -90,
+			A: 180,
+			D: 0,
+		})
+		.gravity("Ground");
+		player2Door = false;
+	}
 });
 
 
