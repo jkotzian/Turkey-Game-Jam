@@ -7,6 +7,10 @@ portalCount = 0
 
 player1Door = false;
 player2Door = false;
+door1AddressX = 0;
+door1AddressY = 0;
+door2AddressX = 0;
+door2AddressY = 0;
 
 Crafty.c('Actor', {
     init: function() {
