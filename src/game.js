@@ -1,6 +1,10 @@
 Game = {
 	start: function() {
 
+
+		player1Door = false;
+		player2Door = false;
+
 		Crafty.init(900,400);
 		Crafty.background('rgb(121,205,205)');
 			
@@ -12,13 +16,33 @@ Game = {
 			.attr({x: 0, y:350, w: 500, h: 50})
 			.color('green');
 		  
-		Crafty.e('Player1')
+		var player1 = Crafty.e('Player1')
 		  	.attr({x: 0, y: 299})
 
-	  	Crafty.e('Player2')
+	  	var player2 = Crafty.e('Player2')
 	  		.attr({x: 100, y: 299})
 
-	  	Crafty.e('Portal')
-	  		.attr({x: 100, y: 200})
+
+		player1.bind('KeyDown', function(e) {
+			if(e.key == Crafty.keys.ENTER && player1Door == false) {
+				console.log("yo")
+				this.portalize();
+			}
+			else if(e.key == Crafty.keys.ENTER && player1Door == true) {
+				console.log("yo")
+				this.unportalize1();
+			}
+		});
+
+		player2.bind('KeyDown', function(e) {
+			if(e.key == Crafty.keys.Q && player2Door == false) {
+				console.log("yo")
+				this.portalize();
+			}
+			else if(e.key == Crafty.keys.Q && player2Door == true) {
+				console.log("yo")
+				this.unportalize2();
+			}
+		});
 	}
  }
