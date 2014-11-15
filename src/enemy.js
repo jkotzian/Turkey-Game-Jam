@@ -9,6 +9,7 @@ Crafty.c('Enemy', {
 		.gravityConst(.3)
 		.switchOnSolids()
 		.collidePortal()
+		.collideHazard()
 		.bind("EnterFrame", function() {
 			//Move the enemy in the game loop
 			//If it hits the edge of the screen
@@ -28,6 +29,11 @@ Crafty.c('Enemy', {
 		})
 	},
 
+	collideHazard: function() {
+		this.onHit('Hazard', this.enemyDie)
+		return this;
+	},
+
 	collidePortal: function() {
 	 	this.onHit('Portal', this.teleport)
 	 	return this;
@@ -36,6 +42,10 @@ Crafty.c('Enemy', {
 	teleport: function() {
 		this.x = 0;
 		this.y = 0;
+	},
+
+	enemyDie: function() {
+		this.destroy()
 	},
 	// Registers a stop-movement function to be called when
 	// this entity hits an entity with the "Solid" component

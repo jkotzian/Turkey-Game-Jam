@@ -10,6 +10,7 @@ Crafty.c('Boy', {
 		.switchOnSolids()
 		.collidePortal()
 		.collideEnemy()
+		.collideHazard()
 		.bind("EnterFrame", function() {
 			//Move the enemy in the game loop
 			//If it hits the edge of the screen
@@ -29,6 +30,10 @@ Crafty.c('Boy', {
 		})
 	},
 
+	collideHazard: function() {
+		this.onHit('Hazard', this.boyDie)
+		return this;
+	},
 	collideEnemy: function() {
 		this.onHit('Enemy', this.boyDie)
 		return this;

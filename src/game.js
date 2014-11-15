@@ -33,8 +33,11 @@ Game = {
 		//Place some ground on the map
 		for (var x = 0; x < Game.map_grid.width; x++) {
 			for (var y = 0; y < Game.map_grid.height; y++) {
-				if (y == Game.map_grid.height - 1) {
+				if (y == Game.map_grid.height - 1 && x <= 4) {
 					Crafty.e('Ground').at(x, y);
+				}
+				if (y == Game.map_grid.height - 1 && x > 4) {
+					Crafty.e('Hazard').at(x, y);
 				}
 			}
 		}
