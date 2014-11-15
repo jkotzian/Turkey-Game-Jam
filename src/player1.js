@@ -30,7 +30,7 @@ Crafty.c('Player1' , {
 	    		this.portalize();
 	    	}
 	    	else if (this.keyDown && this.open == true) {
-	    		this.unportalize1();
+	    		this.unportalize();
 	    	}
 	    	//If the door is open, stop it from moving
 	    	if (this.open) {
