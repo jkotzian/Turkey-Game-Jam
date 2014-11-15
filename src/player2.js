@@ -1,3 +1,10 @@
+portalCount = 0;
+
+//Holds the address of the door for 
+//teleportations to occur
+door2AddressX = 0;
+door2AddressY = 0;
+
 Crafty.c('Player2' , {
 	keyDown: false,
 	open: false,
@@ -14,7 +21,6 @@ Crafty.c('Player2' , {
 		.gravity('Solid')
 		.gravityConst(.3)
 		.stopOnSolids()
-		.collidePortal()
 		.bind('KeyDown', function(e) {
 		    if(e.key == Crafty.keys.V) {
 		        this.keyDown = true
@@ -39,20 +45,17 @@ Crafty.c('Player2' , {
 	    })
 	},
 
-	collidePortal: function() {
-	 	this.onHit('Portal', this.teleport)
-	 	return this;
-	},
-
-	teleport: function() {
-		this.x = 0;
-		this.y = 0;
-	},
 	portalize: function() {
 		this.color('yellow')
 		this.antigravity()
 		this.keyDown = false
 		this.open = true;
+		portalCount += 1;
+		door2AddressX = this.x;
+		door2AddressY = this.y;
+		console.log(portalCount);
+		console.log(door2AddressX);
+		console.log(door2AddressY);
 	},
 
 	unportalize: function() {
@@ -60,6 +63,8 @@ Crafty.c('Player2' , {
 		this.gravity("Ground")
 		this.keyDown = false
 		this.open = false;
+		portalCount -= 1;
+		console.log(portalCount);
 	},
 	// Registers a stop-movement function to be called when
 	// this entity hits an entity with the "Solid" component
@@ -70,7 +75,7 @@ Crafty.c('Player2' , {
 
 	// Stops the movement
 	stopMovement: function() {
-		console.log('HI!');
+		//console.log('HI!');
 		this._speed = 0;
 		if (this._movement) {
 			this.x -= this._movement.x;

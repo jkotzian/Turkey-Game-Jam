@@ -3,8 +3,7 @@ door1AddressY = 0;
 door2AddressX = 0;
 door2AddressY = 0;
 
-entered = 0;
-portalCount = 0;
+portalCount = null
 
 Crafty.c('Boy', { 
 	speed: 3,

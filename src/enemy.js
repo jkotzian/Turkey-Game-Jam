@@ -1,14 +1,22 @@
+door1AddressX = 0;
+door1AddressY = 0;
+door2AddressX = 0;
+door2AddressY = 0;
+
+entered = 0;
+portalCount = 0;
+
 Crafty.c('Enemy', { 
 	speed: 2,
 	direction: 1,
 	init: function() {
-		this.requires('2D, Canvas, Color, Gravity, Collision, Solid')
+		this.requires('2D, Canvas, Color, Gravity, Collision')
 		.attr({x: 0, y: 0, w: 50, h: 50})
 		.color('black')
 		.gravity('Solid')
 		.gravityConst(.3)
 		.switchOnSolids()
-		.collidePortal()
+		.collidePlayer()
 		.collideHazard()
 		.bind("EnterFrame", function() {
 			//Move the enemy in the game loop
@@ -26,6 +34,10 @@ Crafty.c('Enemy', {
 			else {
 				this.x -= this.speed;
 			}
+			if (entered == 1 && !this.hit('Player1') && !this.hit('Player2')) {
+				console.log('portal ready');
+				entered = 0;
+			}
 		})
 	},
 
@@ -34,14 +46,26 @@ Crafty.c('Enemy', {
 		return this;
 	},
 
-	collidePortal: function() {
-	 	this.onHit('Portal', this.teleport)
+	collidePlayer: function() {
+	 	this.onHit('Player1', this.teleport1)
+	 	this.onHit('Player2', this.teleport2)
 	 	return this;
 	},
 
-	teleport: function() {
-		this.x = 0;
-		this.y = 0;
+	teleport1: function() {
+		if (portalCount == 2 && entered == 0) {
+			this.x = door2AddressX;
+			this.y = door2AddressY;
+			entered = 1;
+		}
+	},
+
+	teleport2: function() {
+		if (portalCount == 2 && entered == 0) {
+			this.x = door1AddressX;
+			this.y = door1AddressY;
+			entered = 1;
+		}
 	},
 
 	enemyDie: function() {

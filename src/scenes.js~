@@ -12,7 +12,7 @@ Crafty.scene('Level_1', function() {
 	}
 	  
 	Crafty.e('Player1')
-	  	.attr({x: 300, y: 299})
+	  	.attr({x: 0, y: 299})
 
   	Crafty.e('Player2')
   		.attr({x: 100, y: 299})

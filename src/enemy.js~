@@ -6,31 +6,25 @@ door2AddressY = 0;
 entered = 0;
 portalCount = 0;
 
-Crafty.c('Boy', { 
-	speed: 3,
+Crafty.c('Enemy', { 
+	speed: 2,
 	direction: 1,
 	init: function() {
-		this.requires('2D, Canvas, Color, Gravity, Collision')
+		this.requires('2D, Canvas, Color, Gravity, Collision, Solid')
 		.attr({x: 0, y: 0, w: 50, h: 50})
-		.color('yellow')
+		.color('black')
 		.gravity('Solid')
 		.gravityConst(.3)
 		.switchOnSolids()
-		.collidePortal()
-		.collideEnemy()
+		.collidePlayer()
 		.collideHazard()
 		.bind("EnterFrame", function() {
 			//Move the enemy in the game loop
-			//If he hits the left edge of the screen
-			if (this.x < 0) {
-				//Reverse direction
+			//If it hits the edge of the screen
+			if (this.x > Crafty.viewport.width - this.w ||
+				this.x < 0){
+				//Switch directions
 				this.direction *= -1;
-			}
-			//If he hits the right edge of the screen
-			if (this.x > Crafty.viewport.width - this.w) {
-				console.log("OH HAI")
-				//Go to the next room
-				this.reachedEnd();
 			}
 			//Right
 			if (this.direction == 1) {
@@ -40,34 +34,42 @@ Crafty.c('Boy', {
 			else {
 				this.x -= this.speed;
 			}
+			if (entered == 1 && !this.hit('Player1') && !this.hit('Player2')) {
+				console.log('portal ready');
+				entered = 0;
+			}
 		})
 	},
 
-	reachedEnd: function() {
-		//Trigger the callback to go to the next level
-		Crafty.trigger('NextLevel', this);
-	},
 	collideHazard: function() {
-		this.onHit('Hazard', this.boyDie)
-		return this;
-	},
-	collideEnemy: function() {
-		this.onHit('Enemy', this.boyDie)
+		this.onHit('Hazard', this.enemyDie)
 		return this;
 	},
 
-	boyDie: function() {
-		this.destroy();
-	},
-
-	collidePortal: function() {
-	 	this.onHit('Portal', this.teleport)
+	collidePlayer: function() {
+	 	this.onHit('Player1', this.teleport1)
+	 	this.onHit('Player2', this.teleport2)
 	 	return this;
 	},
 
-	teleport: function() {
-		this.x = 0;
-		this.y = 0;
+	teleport1: function() {
+		if (portalCount == 2 && entered == 0) {
+			this.x = door2AddressX;
+			this.y = door2AddressY;
+			entered = 1;
+		}
+	},
+
+	teleport2: function() {
+		if (portalCount == 2 && entered == 0) {
+			this.x = door1AddressX;
+			this.y = door1AddressY;
+			entered = 1;
+		}
+	},
+
+	enemyDie: function() {
+		this.destroy()
 	},
 	// Registers a stop-movement function to be called when
 	// this entity hits an entity with the "Solid" component
