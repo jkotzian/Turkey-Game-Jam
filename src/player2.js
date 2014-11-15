@@ -32,6 +32,14 @@ Crafty.c('Player2' , {
 		    }
 	    })
 	    .bind('EnterFrame', function(frame) {
+			//Won't go offscreen
+			if (this.x > Crafty.viewport.width - this.w ||
+				this.x < 0){
+				this.x -= this._movement.x;
+			}
+			if (this.y > Crafty.viewport.height - this.h ) {
+				this.y -= this._movement.y;
+			}
 	    	if (this.keyDown && this.open == false) {
 	    		this.portalize();
 	    	}
