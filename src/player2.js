@@ -1,4 +1,6 @@
 Crafty.c('Player2' , {
+	keyDown: false,
+	open: false,
 	init: function() {
 		this.numPlayers += 1;
 		this.requires('2D, Canvas, Color, Multiway, Gravity, Collision')
@@ -12,7 +14,34 @@ Crafty.c('Player2' , {
 		.gravity('Solid')
 		.gravityConst(.3)
 		// .stopOnSolids()
-		.collidePortal();
+		.collidePortal()
+		.bind('KeyDown', function(e) {
+		    if(e.key == Crafty.keys.V) {
+		        this.keyDown = true
+		    }
+	    })
+	    .bind('KeyUp', function(e) {
+		    if(e.key == Crafty.keys.V) {
+		        this.keyDown = false
+		    }
+	    })
+	    .bind('EnterFrame', function(frame) {
+	    	console.log(this.keyDown)
+	    	if (this.keyDown && this.open == false) {
+	    		this.portalize();
+	    	}
+	    	else if (this.keyDown && this.open == true) {
+	    		this.unportalize1();
+	    	}
+	    	//If the door is open, stop it from moving
+	    	if (this.open) {
+		    	this._speed = 0;
+				if (this._movement) {
+					this.x -= this._movement.x;
+					this.y -= this._movement.y;
+				}
+			}
+	    })
 	},
 
 	collidePortal: function() {
@@ -25,24 +54,17 @@ Crafty.c('Player2' , {
 		this.y = 0;
 	},
 	portalize: function() {
-		this.requires('')
-			.color('yellow')
-			.multiway(0, {A:0})
-			.antigravity();
-		player2Door = true;
+		this.color('yellow')
+		this.antigravity()
+		this.keyDown = false
+		this.open = true;
 	},
 
-	unportalize2: function() {
-		console.log('1');
-		this.requires('2D, Canvas, Color, Multiway, Gravity, Collision')
-		.color('red')
-		.multiway(7, {
-			W: -90,
-			A: 180,
-			D: 0,
-		})
-		.gravity("Ground"); 
-		player2Door = false;
+	unportalize1: function() {
+		this.color('red')
+		this.gravity("Ground")
+		this.keyDown = false
+		this.open = false;
 	}
 	// // Registers a stop-movement function to be called when
 	// // this entity hits an entity with the "Solid" component
