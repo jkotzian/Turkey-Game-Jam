@@ -18,7 +18,7 @@ Crafty.c('Player1' , {
 			LEFT_ARROW: 180,
 			RIGHT_ARROW: 0,
 		})
-		.gravity('Solid')
+		.gravity('Ground')
 		.gravityConst(.3)
 		.stopOnSolids()
 		.bind('KeyDown', function(e) {
@@ -43,13 +43,6 @@ Crafty.c('Player1' , {
 		    	this.stopMovement();
 			}
 	    })
-		.bind('PlayerDeath', function() {
-			.multiway(7, {
-				UP_ARROW: -90,
-				LEFT_ARROW: 180,
-				RIGHT_ARROW: 0,
-			})			
-		}
 	},
 
 	portalize: function() {
@@ -84,7 +77,7 @@ Crafty.c('Player1' , {
 	player1Dies: function() {
 		this.trigger("PlayerDeath");
 		this.destroy();
-	}
+	},
 
 	// Stops the movement
 	stopMovement: function() {

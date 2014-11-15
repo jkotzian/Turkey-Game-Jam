@@ -18,7 +18,7 @@ Crafty.c('Player1' , {
 			LEFT_ARROW: 180,
 			RIGHT_ARROW: 0,
 		})
-		.gravity('Solid')
+		.gravity('Ground')
 		.gravityConst(.3)
 		.stopOnSolids()
 		.bind('KeyDown', function(e) {
@@ -70,8 +70,14 @@ Crafty.c('Player1' , {
 	// this entity hits an entity with the "Solid" component
 	stopOnSolids: function() {
 			console.log('???');
+		this.stopMovement();
 		this.onHit('Solid', this.stopMovement);
 		return this;
+	},
+
+	player1Dies: function() {
+		this.trigger("PlayerDeath");
+		this.destroy();
 	},
 
 	// Stops the movement

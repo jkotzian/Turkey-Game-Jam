@@ -2,7 +2,7 @@ Crafty.scene('Level_1', function() {
 	//Place some ground on the map
 	for (var x = 0; x < Game.map_grid.width; x++) {
 		for (var y = 0; y < Game.map_grid.height; y++) {
-			if (y == Game.map_grid.height - 1 || (y == Game.map_grid.height - 2 && x == 4)) {
+			if (y == Game.map_grid.height - 1 || (y == Game.map_grid.height - 2 && x == 4) || (y == Game.map_grid.height - 2 && x == 5) || (y == Game.map_grid.height - 2 && x == 6)) {
 				Crafty.e('Ground').at(x, y);
 			}
 			// if (y == Game.map_grid.height - 1 && x > 4) {
@@ -20,8 +20,8 @@ Crafty.scene('Level_1', function() {
   	 Crafty.e('Enemy')
   	 	.attr({x: 200, y: 200})
 
-  	// Crafty.e('Boy')
-  	// 	.attr({x: 100, y: 200})
+  	 Crafty.e('Boy')
+  	 	.attr({x: 100, y: 200})
 
   	//Crafty.e('Portal')
   	//	.attr({x: 100, y: 200})

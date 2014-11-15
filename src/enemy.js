@@ -3,7 +3,7 @@ door1AddressY = 0;
 door2AddressX = 0;
 door2AddressY = 0;
 
-entered = 0;
+enteredEnemy = 0;
 portalCount = 0;
 
 Crafty.c('Enemy', { 
@@ -34,9 +34,9 @@ Crafty.c('Enemy', {
 			else {
 				this.x -= this.speed;
 			}
-			if (entered == 1 && !this.hit('Player1') && !this.hit('Player2')) {
+			if (enteredEnemy == 1 && !this.hit('Player1') && !this.hit('Player2')) {
 				console.log('portal ready');
-				entered = 0;
+				enteredEnemy = 0;
 			}
 		})
 	},
@@ -53,18 +53,18 @@ Crafty.c('Enemy', {
 	},
 
 	teleport1: function() {
-		if (portalCount == 2 && entered == 0) {
+		if (portalCount == 2 && enteredEnemy == 0) {
 			this.x = door2AddressX;
 			this.y = door2AddressY;
-			entered = 1;
+			enteredEnemy = 1;
 		}
 	},
 
 	teleport2: function() {
-		if (portalCount == 2 && entered == 0) {
+		if (portalCount == 2 && enteredEnemy == 0) {
 			this.x = door1AddressX;
 			this.y = door1AddressY;
-			entered = 1;
+			enteredEnemy = 1;
 		}
 	},
 
