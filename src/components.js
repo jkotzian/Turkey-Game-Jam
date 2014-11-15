@@ -24,6 +24,53 @@ Crafty.c('Portal', {
 	}
 })
 
+Crafty.c('Enemy', { 
+	speed: 2,
+	direction: 1,
+	init: function() {
+		this.requires('2D, Canvas, Color, Gravity, Collision, Solid')
+		.attr({x: 0, y: 0, w: 50, h: 50})
+		.color('black')
+		.gravity('Solid')
+		.gravityConst(.3)
+		.switchOnSolids()
+		.collidePortal()
+		.bind("EnterFrame", function() {
+			//Move the enemy in the game loop
+			//Right
+			if (this.direction == 1) {
+				this.x += this.speed;
+			}
+			//left
+			else {
+				this.x -= this.speed;
+			}
+		})
+	},
+
+	collidePortal: function() {
+	 	this.onHit('Portal', this.teleport)
+	 	return this;
+	},
+
+	teleport: function() {
+		this.x = 0;
+		this.y = 0;
+	},
+	// Registers a stop-movement function to be called when
+	// this entity hits an entity with the "Solid" component
+	switchOnSolids: function() {
+		this.onHit('Solid', this.switchMovement);
+		return this;
+	},
+
+	// Stops the movement
+	switchMovement: function() {
+		this.direction *= -1;
+		console.log(this.direction);
+	},
+})
+
 Crafty.c('Player1' , {
 	init: function() {
 		this.requires('2D, Canvas, Color, Multiway, Gravity, Collision, Solid')
