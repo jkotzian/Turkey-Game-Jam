@@ -11,7 +11,7 @@ Crafty.c('Enemy', {
 	direction: -1,
 	init: function() {
 		this.requires('Actor, Color, Gravity, Collision')
-		.attr({x: 0, y: 0, w: 50, h:50})
+		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h:Game.map_grid.tile.height})
 		.color('black')
 		.gravity('Solid')
 		.gravityConst(.3)

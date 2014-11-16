@@ -12,7 +12,7 @@ Crafty.c('Boy', {
 	direction: 1,
 	init: function() {
 		this.requires('2D, Canvas, Color, Gravity, Collision')
-		.attr({x: 0, y: 0, w: 50, h: 50})
+		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height})
 		.color('yellow')
 		.gravity('Solid')
 		.gravityConst(.3)
@@ -29,9 +29,13 @@ Crafty.c('Boy', {
 			}
 			//If he hits the right edge of the screen
 			if (this.x > Crafty.viewport.width - this.w) {
-				console.log("OH HAI")
-				//Go to the next room
-				this.reachedEnd();
+				if (numTeddy == 0) {
+					//Go to the next room
+					this.reachedEnd();
+				}
+				else {
+					this.direction *= -1;
+				}
 			}
 			//Right
 			if (this.direction == 1) {
@@ -42,7 +46,7 @@ Crafty.c('Boy', {
 				this.x -= this.speed;
 			}
 			if (enteredBoy == 1 && !this.hit('Player1') && !this.hit('Player2')) {
-				console.log('portal ready');
+				//console.log('portal ready');
 				enteredBoy = 0;
 			}
 		})
@@ -50,13 +54,7 @@ Crafty.c('Boy', {
 
 	reachedEnd: function() {
 		//Trigger the callback to go to the next level
-
-		if (numTeddy == 0) {
-			Crafty.trigger('NextLevel', this);
-		}
-		else if (numTeddy > 0) {
-			document.write('Collect All Bears Before Exiting Game');
-		}
+		Crafty.trigger('NextLevel', this);
 	},
 	collideHazard: function() {
 		this.onHit('Hazard', this.boyDie)
@@ -103,6 +101,6 @@ Crafty.c('Boy', {
 	// Stops the movement
 	switchMovement: function() {
 		this.direction *= -1;
-		console.log(this.direction);
+		//console.log(this.direction);
 	},
 })

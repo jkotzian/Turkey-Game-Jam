@@ -31,8 +31,9 @@ Crafty.c('Actor', {
 
 Crafty.c('Ground', {
 	init: function() {
-		this.requires('Actor, Color, Solid')
-			.color('green');
+		this.requires('Actor, Color, Solid, Collision')
+			.color('green')
+			//.collision(new Crafty.polygon([50,0], [70,70], [0,100]))
 	}
 });
 

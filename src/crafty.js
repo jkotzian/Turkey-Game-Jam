@@ -1034,6 +1034,7 @@ Crafty.c("Gravity", {
     },
 
     _enterFrame: function () {
+        //console.log(this._falling);
         if (this._falling) {
             //if falling, move the players Y
             this._gy += this._gravityConst;
@@ -1068,7 +1069,6 @@ Crafty.c("Gravity", {
                 break;
             }
         }
-
         if (hit) { //stop falling if found and player is moving down
             if (this._falling && ((this._gy > this._jumpSpeed) || !this._up)){
               this.stopFalling(hit);
@@ -4601,6 +4601,7 @@ Crafty.c("Multiway", {
         if (this._keys[e.key]) {
             this._movement.x = Math.round((this._movement.x + this._keys[e.key].x) * 1000) / 1000;
             this._movement.y = Math.round((this._movement.y + this._keys[e.key].y) * 1000) / 1000;
+            //console.log(this._movement.y)
             this.trigger('NewDirection', this._movement);
         }
     },
@@ -4609,6 +4610,7 @@ Crafty.c("Multiway", {
         if (this._keys[e.key]) {
             this._movement.x = Math.round((this._movement.x - this._keys[e.key].x) * 1000) / 1000;
             this._movement.y = Math.round((this._movement.y - this._keys[e.key].y) * 1000) / 1000;
+            //console.log(this._keys[e.key].x * 1000);
             this.trigger('NewDirection', this._movement);
         }
     },
@@ -4672,6 +4674,7 @@ Crafty.c("Multiway", {
         };
 
         if (keys) {
+
             if (speed.x !== undefined && speed.y !== undefined) {
                 this._speed.x = speed.x;
                 this._speed.y = speed.y;
@@ -4832,7 +4835,6 @@ Crafty.c("Twoway", {
      * @see Gravity, Fourway
      */
     twoway: function (speed, jump) {
-
         this.multiway(speed, {
             RIGHT_ARROW: 0,
             LEFT_ARROW: 180,
@@ -4850,13 +4852,17 @@ Crafty.c("Twoway", {
         this.bind("EnterFrame", function () {
             if (this.disableControls) return;
             if (this._up) {
+
                 this.y -= this._jumpSpeed;
                 this._falling = true;
                 this.trigger('Moved', { x: this._x, y: this._y + this._jumpSpeed });
             }
         }).bind("KeyDown", function (e) {
-            if (!this._falling && (e.key === Crafty.keys.UP_ARROW || e.key === Crafty.keys.Z))
+            if (!this._falling && (e.key === Crafty.keys.UP_ARROW)) {
                 this._up = true;
+                // this._movement.y = Math.round((this._movement.y - 1) * 1000) / 1000;
+                // console.log(this._movement.y);
+            }
         });
 
         return this;
@@ -4921,7 +4927,7 @@ Crafty.c("Twoway2", {
                 this.trigger('Moved', { x: this._x, y: this._y + this._jumpSpeed });
             }
         }).bind("KeyDown", function (e) {
-            if (!this._falling && (e.key === Crafty.keys.W || e.key === Crafty.keys.Z))
+            if (!this._falling && (e.key === Crafty.keys.W))
                 this._up = true;
         });
 
