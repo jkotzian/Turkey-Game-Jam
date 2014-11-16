@@ -5,6 +5,7 @@ door2AddressY = 0;
 
 enteredBoy = 0;
 portalCount = 0;
+numTeddy = 0;
 
 Crafty.c('Boy', { 
 	speed: 3,
@@ -49,7 +50,13 @@ Crafty.c('Boy', {
 
 	reachedEnd: function() {
 		//Trigger the callback to go to the next level
-		Crafty.trigger('NextLevel', this);
+
+		if (numTeddy == 0) {
+			Crafty.trigger('NextLevel', this);
+		}
+		else if (numTeddy > 0) {
+			document.write('Collect All Bears Before Exiting Game');
+		}
 	},
 	collideHazard: function() {
 		this.onHit('Hazard', this.boyDie)

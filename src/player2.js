@@ -10,7 +10,9 @@ Crafty.c('Player2' , {
 	open: false,
 	init: function() {
 		this.numPlayers += 1;
-		this.requires('Actor, Color, Twoway2, Gravity, Collision')
+
+		this.requires('Actor, Color, Twoway2, Gravity, Collision, Player')
+
 		.attr({x: 0, y: 0, w: 50, h: 50})
 		.color('red')
 		.twoway2(4)
