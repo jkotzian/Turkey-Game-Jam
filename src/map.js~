@@ -46,7 +46,7 @@ Crafty.c('Portal', {
 
 Crafty.c('Hazard', {
 	init: function() {
-		this.requires('Actor, Color, Hazard, Ground')
+		this.requires('Actor, Color, Hazard, Solid')
 			.color('orange')
 	}
 })

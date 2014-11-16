@@ -11,7 +11,7 @@ Crafty.c('Enemy', {
 	direction: -1,
 	init: function() {
 		this.requires('Actor, Color, Gravity, Collision')
-		.attr({x: 0, y: 0, w: 50, h:50})
+		.attr({x: 0, y: 0, w:  Game.map_grid.tile.width, h: Game.map_grid.tile.height})
 		.color('black')
 		.gravity('Solid')
 		.gravityConst(.3)
@@ -22,10 +22,10 @@ Crafty.c('Enemy', {
 		.bind("EnterFrame", function() {
 			//Move the enemy in the game loop
 			//If it hits the edge of the screen
-			if (this.x > Crafty.viewport.width - this.w ||
-				this.x < 0){
+			if (this.x > Crafty.viewport.width - this.w || this.x < 0){
+				console.log("OH HAI")
 				//Switch directions
-				this.switchDirection;
+				this.switchDirection();
 			}
 			//Right
 			if (this.direction == 1) {
@@ -52,6 +52,7 @@ Crafty.c('Enemy', {
 		this.onHit('Boundary', this.switchDirection)
 		return this;
 	},
+
 	collideHazard: function() {
 		this.onHit('Hazard', this.enemyDie)
 		return this;

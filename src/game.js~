@@ -4,7 +4,7 @@ Game = {
 
     map_grid: {
         width:  27,
-        height: 14,
+        height: 15,
         tile: {
           width:  90,
           height: 90

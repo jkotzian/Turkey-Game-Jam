@@ -11,11 +11,11 @@ Crafty.c('Boy', {
 	speed: 3,
 	direction: 1,
 	init: function() {
-		this.requires('2D, Canvas, Color, Gravity, Collision')
+		this.requires('Actor, Color, Gravity, Collision')
 		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height})
 		.color('yellow')
 		.gravity('Ground')
-		.gravityConst(.3)
+		.gravityConst(2)
 		.switchOnGrounds()
 		.collidePlayer()
 		.collideEnemy()
@@ -24,7 +24,7 @@ Crafty.c('Boy', {
 			//Move the enemy in the game loop
 			//If he hits the left edge of the screen
 			//If he hits the right edge of the screen
-			if (this.x > Crafty.viewport.width - this.w) {
+			if (this.x > Crafty.viewport.width - this.w|| this.x < 0) {
 				console.log("OH HAI")
 				//Go to the next room
 				this.reachedEnd();
@@ -95,7 +95,9 @@ Crafty.c('Boy', {
 	// Registers a stop-movement function to be called when
 	// this entity hits an entity with the "Ground" component
 	switchOnGrounds: function() {
-		this.onHit('Ground', this.switchMovement);
+		//if (this._falling == false) {
+			this.onHit('Ground', this.switchMovement);
+		//}
 		return this;
 	},
 

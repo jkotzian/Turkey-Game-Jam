@@ -11,12 +11,12 @@ Crafty.c('Player1' , {
 	init: function() {
 		this.numPlayers += 1;
 
-		this.requires('Actor, Color, Twoway, Gravity, Collision, Player')
+		this.requires('Actor, Color, Multiway, Gravity, Collision, Player')
 		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height})
 		.color('red')
-		.twoway(7)
+		.multiway(20,{LEFT_ARROW:180,RIGHT_ARROW:0,UP_ARROW:-90})
 		.gravity('Solid')
-		.gravityConst(.4)
+		.gravityConst(.55)
 		.stopOnSolids()
 		.bind('KeyDown', function(e) {
 		    if(e.key == Crafty.keys.DOWN_ARROW) {
@@ -34,7 +34,7 @@ Crafty.c('Player1' , {
 				this.x < 0){
 				this.x -= this._movement.x;
 			}
-			if (this.y > Crafty.viewport.height - this.h ) {
+			if (this.y > Crafty.viewport.height - this.h || this.y < 0) {
 				this.y -= this._movement.y;
 			}
 	    	if (this.keyDown && this.open == false) {
@@ -75,10 +75,6 @@ Crafty.c('Player1' , {
 	stopOnSolids: function() {
 		this.onHit('Solid', this.stopMovement);
 		return this;
-	},
-	player1Dies: function() {
-		this.trigger("PlayerDeath");
-		this.destroy();
 	},
 	// Stops the movement
 	stopMovement: function() {
