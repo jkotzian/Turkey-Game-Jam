@@ -57,12 +57,7 @@ Game = {
 			door2: [0, 0]
 		})
 
-		Crafty.sprite(200, 200, "src/images/doors_opened.png",
-		{
-			doorsopened: [0,0]
-		})
-
-		Crafty.scene('Level_6');
+		Crafty.scene('Start');
 	}
  }
 

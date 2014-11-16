@@ -14,7 +14,6 @@ Crafty.c('Player1' , {
 		this.requires('Actor, door1, doorsopened, Twoway, Gravity, Collision, Player, SpriteAnimation')
 		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height * 2})
 		.twoway(10)
-		.reel('door1_open',500,0,5,0)
 		.reel('door1_standing_left',500,0,0,4)
 		.reel('door1_standing_right',500,0,1,4)
 		.reel('door1_walking_left',500,0,2,4)

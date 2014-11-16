@@ -87,7 +87,6 @@ Crafty.c('Player2' , {
 	},
 
 	portalize: function() {
-		this.color('yellow')
 		this.antigravity()
 		this.keyDown = false
 		this.open = true;
@@ -97,7 +96,6 @@ Crafty.c('Player2' , {
 	},
 
 	unportalize: function() {
-		this.color('red')
 		this.gravity('Solid')
 		this.keyDown = false
 		this.open = false;
