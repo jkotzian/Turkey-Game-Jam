@@ -28,7 +28,7 @@ Crafty.c('Player1' , {
 		    }
 		    if (e.key == Crafty.keys.R) {
 				console.log("R")
-		    	Crafty.trigger("ReplayScene");
+		    	boy.boyDie()
 		    }
 	    })
 	    .bind('KeyUp', function(e) {

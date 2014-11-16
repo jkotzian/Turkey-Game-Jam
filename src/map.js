@@ -2,6 +2,24 @@
 //  on a grid of tiles
 // An "Actor" is an entity that is drawn in 2D on canvas
 //  via our logical coordinate grid
+Crafty.c('StartScreen', 
+{
+	press: false,
+	init: function() {
+		this.requires('Actor, Color, Twoway, Gravity, Collision, Player')
+		.attr({x: 0, y: 0, w: 10, h: 10})
+		.bind('KeyDown', function(e) {
+	    	if(e.key == Crafty.keys.SPACE) {
+	        	this.press = true
+	   	 	}
+    	})
+		.bind('EnterFrame', function(frame) {
+    		if (this.press) {
+    			Crafty.trigger('GoTo1', this);
+    		}
+    	})
+    }
+});
 
 Crafty.c('Grid', {
 	init: function () {
@@ -21,7 +39,8 @@ Crafty.c('Grid', {
       		return this;
     	}
   	}
-})
+});
+
 Crafty.c('Actor', {
     init: function() {
         this.requires('2D, Canvas, Grid');
