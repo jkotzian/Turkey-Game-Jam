@@ -49,7 +49,13 @@ Crafty.c('Boy', {
 
 	reachedEnd: function() {
 		//Trigger the callback to go to the next level
-		Crafty.trigger('NextLevel', this);
+
+		if (numTeddy == 0) {
+			Crafty.trigger('NextLevel', this);
+		}
+		else if (numTeddy > 0) {
+			document.write('Collect All Bears Before Exiting Game');
+		}
 	},
 	collideHazard: function() {
 		this.onHit('Hazard', this.boyDie)
@@ -86,15 +92,6 @@ Crafty.c('Boy', {
 		this.destroy();
 	},
 
-	collidePortal: function() {
-	 	this.onHit('Portal', this.teleport)
-	 	return this;
-	},
-
-	teleport: function() {
-		this.x = 0;
-		this.y = 0;
-	},
 	// Registers a stop-movement function to be called when
 	// this entity hits an entity with the "Solid" component
 	switchOnSolids: function() {

@@ -10,14 +10,14 @@ Crafty.c('Player2' , {
 	open: false,
 	init: function() {
 		this.numPlayers += 1;
-		this.requires('2D, Canvas, Color, Multiway, Gravity, Collision')
+<<<<<<< HEAD
+		this.requires('2D, Canvas, Color, Twoway2, Gravity, Collision, Player')
+=======
+		this.requires('Actor, Color, Twoway2, Gravity, Collision')
+>>>>>>> 59597096bfa46e141d5951643459b934ff02c61a
 		.attr({x: 0, y: 0, w: 50, h: 50})
 		.color('red')
-		.multiway(7, {
-			W: -90,
-			A: 180,
-			D: 0,
-		})
+		.twoway2(4)
 		.gravity('Solid')
 		.gravityConst(.3)
 		.stopOnSolids()
@@ -32,6 +32,14 @@ Crafty.c('Player2' , {
 		    }
 	    })
 	    .bind('EnterFrame', function(frame) {
+			//Won't go offscreen
+			if (this.x > Crafty.viewport.width - this.w ||
+				this.x < 0){
+				this.x -= this._movement.x;
+			}
+			if (this.y > Crafty.viewport.height - this.h ) {
+				this.y -= this._movement.y;
+			}
 	    	if (this.keyDown && this.open == false) {
 	    		this.portalize();
 	    	}
@@ -43,6 +51,9 @@ Crafty.c('Player2' , {
 		    	this.stopMovement();
 			}
 	    })
+		.bind('Death2', function(e) {
+			this.destroy()
+		})
 	},
 
 	portalize: function() {
@@ -53,20 +64,14 @@ Crafty.c('Player2' , {
 		portalCount += 1;
 		door2AddressX = this.x;
 		door2AddressY = this.y;
-		console.log(portalCount);
-		console.log(door2AddressX);
-		console.log(door2AddressY);
 	},
 
 	unportalize: function() {
 		this.color('red')
-		this.gravity("Ground")
+		this.gravity('Solid')
 		this.keyDown = false
 		this.open = false;
 		portalCount -= 1;
-		door2AddressX = 0;
-		door2AddressY = 0;
-		console.log(portalCount);
 	},
 	// Registers a stop-movement function to be called when
 	// this entity hits an entity with the "Solid" component
