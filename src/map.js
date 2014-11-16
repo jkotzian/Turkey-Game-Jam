@@ -17,6 +17,7 @@ Crafty.c('Grid', {
       		return { x: this.x/Game.map_grid.tile.width, y: this.y/Game.map_grid.tile.height }
     	} 
     	else {
+    		console.log(this.x * Game.map_grid.tile.width);
       		this.attr({ x: x * Game.map_grid.tile.width, y: y * Game.map_grid.tile.height });
       		return this;
     	}
@@ -47,6 +48,13 @@ Crafty.c('Hazard', {
 	init: function() {
 		this.requires('Actor, Color, Hazard')
 			.color('orange')
+	}
+})
+
+Crafty.c('Boundary', {
+	init: function() {
+		this.requires('Actor, Color, Boundary')
+			.color('blue', 0)
 	}
 })
 
