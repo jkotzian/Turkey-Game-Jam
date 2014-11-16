@@ -20,12 +20,12 @@ Crafty.c('Player2' , {
 		.gravityConst(.3)
 		.stopOnSolids()
 		.bind('KeyDown', function(e) {
-		    if(e.key == Crafty.keys.V) {
+		    if(e.key == Crafty.keys.S) {
 		        this.keyDown = true
 		    }
 	    })
 	    .bind('KeyUp', function(e) {
-		    if(e.key == Crafty.keys.V) {
+		    if(e.key == Crafty.keys.S) {
 		        this.keyDown = false
 		    }
 	    })
