@@ -10,11 +10,13 @@ Crafty.c('Enemy', {
 	speed: 2,
 	direction: -1,
 	init: function() {
-		this.requires('Actor, Color, Gravity, Collision')
+		this.requires('Actor, enemy, Gravity, Collision, SpriteAnimation')
 		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h:Game.map_grid.tile.height})
-		.color('black')
 		.gravity('Solid')
 		.gravityConst(.3)
+		.reel('enemy_left',400,0,0,3)
+		.reel('enemy_right' ,400,0,1,3)
+		.animate('enemy_right',-1)
 		.switchOnSolids()
 		.collidePlayer()
 		.collideHazard()
@@ -47,6 +49,10 @@ Crafty.c('Enemy', {
 
 	switchDirection: function() {
 		this.direction *= -1;
+		if(this.direction == 1)
+			this.animate('enemy_right', -1);
+		else
+			this.animate('enemy_left', -1);
 	},
 	collideBoundary: function() {
 		this.onHit('Boundary', this.switchDirection)

@@ -4,16 +4,14 @@ Crafty.c("teddyBears", {
 	init: function() {
 		this.numBears += 1;
 		numTeddy += 0;
-		this.requires('Actor, Color, Collision')
-			.attr({w:50,h:50})
-			.color('#663300')
+		this.requires('Actor, teddy, Collision')
+			.attr({w:100,h:100})
 			.getTeddy();
 	},
 
 	getTeddy: function() {
 		this.onHit('Boy', this.destroyTeddy);
 		return this;
-
 	},
 
 	destroyTeddy: function() {

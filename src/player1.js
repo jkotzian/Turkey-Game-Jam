@@ -9,23 +9,31 @@ Crafty.c('Player1' , {
 	keyDown: false,
 	jumpKeyDown: false,
 	open: false,
-	colHit: false,
 	init: function() {
 		this.numPlayers += 1;
-		this.requires('Actor, Color, Twoway, Gravity, Collision, Player')
-		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height})
-		.color('red')
+		this.requires('Actor, door1, doorsopened, Twoway, Gravity, Collision, Player, SpriteAnimation')
+		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height * 2})
 		.twoway(10)
+		.reel('door1_open',500,0,5,0)
+		.reel('door1_standing_left',500,0,0,4)
+		.reel('door1_standing_right',500,0,1,4)
+		.reel('door1_walking_left',500,0,2,4)
+		.reel('door1_walking_right',500,0,3,4)
+		.animate('door1_standing_left', -1)
 		.gravity('Solid')
-		.gravityConst(.70)
+		.gravityConst(.7)
 		.stopOnSolids()
 		.stopOnBox()
 		.bind('KeyDown', function(e) {
 		    if(e.key == Crafty.keys.DOWN_ARROW) {
-		        this.keyDown = true
+		        this.keyDown = true;
 		    }
 		    if (e.key == Crafty.keys.UP_ARROW) {
 		    	this.jumpKeyDown = true
+		    }
+		    if (e.key == Crafty.keys.R) {
+				console.log("R")
+		    	Crafty.trigger("ReplayScene");
 		    }
 	    })
 	    .bind('KeyUp', function(e) {
@@ -36,6 +44,28 @@ Crafty.c('Player1' , {
 		    	this.jumpKeyDown = false
 		    }
 	    })
+	    .bind('KeyDown', function(e)
+	    {
+	    	if(e.key == Crafty.keys.RIGHT_ARROW)
+	    	{
+	    		this.animate('door1_walking_right', -1);
+	    	}
+	    	if(e.key == Crafty.keys.LEFT_ARROW)
+	    	{
+	    		this.animate('door1_walking_left', -1);
+	    	}
+	    })
+	    .bind('KeyUp', function(e) {
+	    	if(e.key == Crafty.keys.RIGHT_ARROW)
+	    	{
+	    		this.animate('door1_standing_right', -1);
+	    	}
+	    	if(e.key == Crafty.keys.LEFT_ARROW)
+	    	{
+	    		this.animate('door1_standing_left', -1);
+	    	}
+	    })
+
 	    .bind('EnterFrame', function(frame) {
 			//Won't go offscreen
 			if (this.x > Crafty.viewport.width - this.w ||
@@ -62,7 +92,6 @@ Crafty.c('Player1' , {
 	},
 
 	portalize: function() {
-		this.color('yellow')
 		this.antigravity()
 		this.keyDown = false
 		this.open = true;
@@ -72,7 +101,6 @@ Crafty.c('Player1' , {
 	},
 
 	unportalize: function() {
-		this.color('red')
 		this.gravity('Solid')
 		this.keyDown = false
 		this.open = false;
