@@ -11,9 +11,10 @@ Crafty.c('Player1' , {
 	open: false,
 	init: function() {
 		this.numPlayers += 1;
-		this.requires('Actor, door1, doorsopened, Twoway, Gravity, Collision, Player, SpriteAnimation')
-		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height * 1.8})
+		this.requires('Actor, door1, Twoway, Gravity, Collision, Player, SpriteAnimation')
+		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height * 2})
 		.twoway(10)
+		.reel('door1_open',500,0,4,1)
 		.reel('door1_standing_left',500,0,0,4)
 		.reel('door1_standing_right',500,0,1,4)
 		.reel('door1_walking_left',500,0,2,4)
@@ -26,7 +27,7 @@ Crafty.c('Player1' , {
 		.bind('KeyDown', function(e) {
 		    if(e.key == Crafty.keys.DOWN_ARROW) {
 		        this.keyDown = true;
-		        //this.animate('door1_open', -1);
+		        this.animate('door1_open', -1);
 		    }
 		    if (e.key == Crafty.keys.UP_ARROW) {
 		    	this.jumpKeyDown = true
