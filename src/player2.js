@@ -13,11 +13,11 @@ Crafty.c('Player2' , {
 
 		this.requires('Actor, Color, Twoway2, Gravity, Collision, Player')
 
-		.attr({x: 0, y: 0, w: 50, h: 50})
+		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height})
 		.color('red')
-		.twoway2(4)
+		.twoway2(10)
 		.gravity('Solid')
-		.gravityConst(.3)
+		.gravityConst(.55)
 		.stopOnSolids()
 		.bind('KeyDown', function(e) {
 		    if(e.key == Crafty.keys.S) {

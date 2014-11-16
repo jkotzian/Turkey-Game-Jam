@@ -11,7 +11,7 @@ Crafty.c("teddyBears", {
 	},
 
 	getTeddy: function() {
-		this.onHit('Player', this.destroyTeddy);
+		this.onHit('Boy', this.destroyTeddy);
 		return this;
 
 	},

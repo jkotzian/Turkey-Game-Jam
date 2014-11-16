@@ -10,24 +10,22 @@ Crafty.c('Player2' , {
 	open: false,
 	init: function() {
 		this.numPlayers += 1;
-<<<<<<< HEAD
-		this.requires('2D, Canvas, Color, Twoway2, Gravity, Collision, Player')
-=======
-		this.requires('Actor, Color, Twoway2, Gravity, Collision')
->>>>>>> 59597096bfa46e141d5951643459b934ff02c61a
-		.attr({x: 0, y: 0, w: 50, h: 50})
+
+		this.requires('Actor, Color, Twoway2, Gravity, Collision, Player')
+
+		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height})
 		.color('red')
-		.twoway2(4)
-		.gravity('Solid')
-		.gravityConst(.3)
-		.stopOnSolids()
+		.twoway2(10)
+		.gravity('Ground')
+		.gravityConst(.55)
+		.stopOnGrounds()
 		.bind('KeyDown', function(e) {
-		    if(e.key == Crafty.keys.V) {
+		    if(e.key == Crafty.keys.S) {
 		        this.keyDown = true
 		    }
 	    })
 	    .bind('KeyUp', function(e) {
-		    if(e.key == Crafty.keys.V) {
+		    if(e.key == Crafty.keys.S) {
 		        this.keyDown = false
 		    }
 	    })
@@ -68,15 +66,15 @@ Crafty.c('Player2' , {
 
 	unportalize: function() {
 		this.color('red')
-		this.gravity('Solid')
+		this.gravity('Ground')
 		this.keyDown = false
 		this.open = false;
 		portalCount -= 1;
 	},
 	// Registers a stop-movement function to be called when
-	// this entity hits an entity with the "Solid" component
-	stopOnSolids: function() {
-		this.onHit('Solid', this.stopMovement);
+	// this entity hits an entity with the "Ground" component
+	stopOnGrounds: function() {
+		this.onHit('Ground', this.stopMovement);
 		return this;
 	},
 
