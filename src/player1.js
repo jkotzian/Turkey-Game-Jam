@@ -17,7 +17,7 @@ Crafty.c('Player1' , {
 		.color('red')
 		.twoway(10)
 		.gravity('Solid')
-		.gravityConst(.60)
+		.gravityConst(.7)
 		.stopOnSolids()
 		.stopOnBox()
 		.bind('KeyDown', function(e) {

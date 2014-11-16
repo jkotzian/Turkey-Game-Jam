@@ -8,7 +8,7 @@ portalCount = 0;
 numTeddy = 0;
 
 Crafty.c('Boy', { 
-	speed: 3,
+	speed: 15,
 	direction: 1,
 	init: function() {
 		this.requires('2D, Canvas, Color, Gravity, Collision')
@@ -24,14 +24,9 @@ Crafty.c('Boy', {
 			//Move the enemy in the game loop
 			//If he hits the left edge of the screen
 			//If he hits the right edge of the screen
-			if (this.x > Crafty.viewport.width - this.w) {
-				if (numTeddy == 0) {
-					//Go to the next room
-					this.reachedEnd();
-				}
-				else {
-					this.switchDirection();
-				}
+			if (this.x > Crafty.viewport.width - this.w ||
+				this.x < 0) {
+				this.reachedEnd();
 			}
 			//Right
 			if (this.direction == 1) {
@@ -49,8 +44,14 @@ Crafty.c('Boy', {
 	},
 
 	reachedEnd: function() {
-		//Trigger the callback to go to the next level
-		Crafty.trigger('NextLevel', this);
+		if (numTeddy == 0) {
+			//Go to the next room
+			//Trigger the callback to go to the next level
+			Crafty.trigger('NextLevel', this);
+		}
+		else {
+			this.switchDirection();
+		}
 	},
 	switchDirection: function() {
 		this.direction *= -1;

@@ -17,7 +17,6 @@ Crafty.c('Grid', {
       		return { x: this.x/Game.map_grid.tile.width, y: this.y/Game.map_grid.tile.height }
     	} 
     	else {
-    		console.log(this.x * Game.map_grid.tile.width);
       		this.attr({ x: x * Game.map_grid.tile.width, y: y * Game.map_grid.tile.height });
       		return this;
     	}
@@ -33,7 +32,6 @@ Crafty.c('Ground', {
 	init: function() {
 		this.requires('Actor, Color, Solid, Collision')
 			.color('green')
-			//.collision(new Crafty.polygon([50,0], [70,70], [0,100]))
 	}
 });
 

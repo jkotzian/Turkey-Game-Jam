@@ -12,12 +12,12 @@ Crafty.c('Player2' , {
 	colHit: false,
 	init: function() {
 		this.numPlayers += 1;
-		this.requires('Actor, Color, Twoway2, Gravity, Collision, Player')
+		this.requires('Actor, Color, Twoway, Gravity, Collision, Player')
 		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height})
 		.color('red')
-		.twoway2(10)
+		.twoway(10)
 		.gravity('Solid')
-		.gravityConst(.60)
+		.gravityConst(.7)
 		.stopOnSolids()
 		.stopOnBox()
 		.bind('KeyDown', function(e) {
