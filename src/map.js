@@ -70,7 +70,7 @@ Crafty.c('Hazard', {
 Crafty.c('Boundary', {
 	init: function() {
 		this.requires('Actor, Color, Boundary')
-			.color('blue')
+	
 	}
 })
 
