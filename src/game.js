@@ -27,8 +27,45 @@ Game = {
 			Game.map_grid.tile.width,
 			Game.map_grid.height * 
 			Game.map_grid.tile.height);
-		Crafty.background('lightgray');
+		//Crafty.background('url(ibackground_1.png)');  
+		//Crafty.background('lightgray');
+		Crafty.background('url(src/images/background_new.png) no-repeat center center');
+		//Crafty.background("url('path/to/image.png')");
+
+		Crafty.sprite(100, "src/images/boy_sprite_walking.png",
+		{
+			boy: [0, 0]
+		});
+
+		Crafty.sprite(100, "src/images/enemy_sprite.png",
+		{
+			enemy: [0, 0]
+		});
+
+		Crafty.sprite(100, "src/images/teddy.png",
+		{
+			teddy: [0, 0]
+		})
+
+		Crafty.sprite(100, 200, "src/images/door_1_sprite.png",
+		{
+			door1: [0, 0]
+		})
+
+		Crafty.sprite(100, 200, "src/images/door_2_sprite.png",
+		{
+			door2: [0, 0]
+		})
+
+		Crafty.sprite(200, 200, "src/images/doors_opened.png",
+		{
+			doorsopened: [0,0]
+		})
 
 		Crafty.scene('Level_6');
 	}
  }
+
+
+        
+  

@@ -11,10 +11,13 @@ Crafty.c('Boy', {
 	speed: 3,
 	direction: 1,
 	init: function() {
-		this.requires('Actor, Color, Gravity, Collision')
+		this.requires('Actor, boy, Gravity, Collision, SpriteAnimation')
+		.reel('boy_walking_left',600,0,0,5)
+		.reel('boy_walking_right', 600,0,1,5)
+		.animate('boy_walking_right', -1)
 		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height})
-		.color('yellow')
 		.gravity('Ground')
+		//.color('yellow')
 		.gravityConst(2)
 		.switchOnGrounds()
 		.collidePlayer()
@@ -65,6 +68,12 @@ Crafty.c('Boy', {
 	},
 	switchDirection: function() {
 		this.direction *= -1;
+		if(this.direction == 1) {
+			this.animate('boy_walking_right', -1);
+		}
+		else {
+			this.animate('boy_walking_left', -1);
+		}
 	},
 	collideHazard: function() {
 		this.onHit('Hazard', this.boyDie)
@@ -196,14 +205,8 @@ Crafty.c('Boy', {
 	// this entity hits an entity with the "Ground" component
 	switchOnGrounds: function() {
 		//if (this._falling == false) {
-			this.onHit('Ground', this.switchMovement);
+			this.onHit('Ground', this.switchDirection);
 		//}
 		return this;
-	},
-
-	// Stops the movement
-	switchMovement: function() {
-		this.direction *= -1;
-		//console.log(this.direction);
 	},
 })

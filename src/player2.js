@@ -11,10 +11,14 @@ Crafty.c('Player2' , {
 	open: false,
 	init: function() {
 		this.numPlayers += 1;
-		this.requires('Actor, Color, Twoway2, Gravity, Collision, Player')
-		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height})
-		.color('red')
+		this.requires('Actor, door2, Twoway2, Gravity, Collision, Player, SpriteAnimation')
+		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height * 2})
 		.twoway2(10)
+		.reel('door2_standing_left',500,0,0,4)
+		.reel('door2_standing_right',500,0,1,4)
+		.reel('door2_walking_left',500,0,2,4)
+		.reel('door2_walking_right',500,0,3,4)
+		.animate('door2_standing_left', -1)
 		.gravity('Solid')
 		.gravityConst(.7)
 		.stopOnSolids()
@@ -35,6 +39,28 @@ Crafty.c('Player2' , {
 		    	this.jumpKeyDown = false
 		    }
 	    })
+	    .bind('KeyDown', function(e)
+	    {
+	    	if(e.key == Crafty.keys.D)
+	    	{
+	    		this.animate('door2_walking_right', -1);
+	    	}
+	    	if(e.key == Crafty.keys.A)
+	    	{
+	    		this.animate('door2_walking_left', -1);
+	    	}
+	    })
+	    .bind('KeyUp', function(e) {
+	    	if(e.key == Crafty.keys.D)
+	    	{
+	    		this.animate('door2_standing_right', -1);
+	    	}
+	    	if(e.key == Crafty.keys.A)
+	    	{
+	    		this.animate('door2_standing_left', -1);
+	    	}
+	    })
+
 	    .bind('EnterFrame', function(frame) {
 			//Won't go offscreen
 			if (this.x > Crafty.viewport.width - this.w ||
