@@ -24,13 +24,7 @@ Crafty.c('Boy', {
 			//Move the enemy in the game loop
 			//If he hits the left edge of the screen
 			//If he hits the right edge of the screen
-<<<<<<< HEAD
-			if (this.x > Crafty.viewport.width - this.w|| this.x < 0) {
-				console.log("OH HAI")
-				//Go to the next room
-				this.reachedEnd();
-=======
-			if (this.x > Crafty.viewport.width - this.w) {
+			if (this.x > Crafty.viewport.width - this.w || this.x < 0) {
 				if (numTeddy == 0) {
 					//Go to the next room
 					this.reachedEnd();
@@ -38,7 +32,6 @@ Crafty.c('Boy', {
 				else {
 					this.switchDirection();
 				}
->>>>>>> aa708f996b1c1153bd94137955d86f8d55005439
 			}
 			//Right
 			if (this.direction == 1) {
@@ -95,6 +88,7 @@ Crafty.c('Boy', {
 
 	boyDie: function() {
 		this.destroy();
+		Crafty.e('Replay');
 	},
 
 	// Registers a stop-movement function to be called when

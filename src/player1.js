@@ -27,6 +27,10 @@ Crafty.c('Player1' , {
 		    if (e.key == Crafty.keys.UP_ARROW) {
 		    	this.jumpKeyDown = true
 		    }
+		    if (e.key == Crafty.keys.R) {
+				console.log("R")
+		    	Crafty.trigger("ReplayScene");
+		    }
 	    })
 	    .bind('KeyUp', function(e) {
 		    if(e.key == Crafty.keys.DOWN_ARROW) {

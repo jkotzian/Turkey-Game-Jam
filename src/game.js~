@@ -29,10 +29,6 @@ Game = {
 			Game.map_grid.tile.height);
 		Crafty.background('lightgray');
 
-<<<<<<< HEAD
-		Crafty.scene('Level_5');
-=======
-		Crafty.scene('Level_2');
->>>>>>> aa708f996b1c1153bd94137955d86f8d55005439
+		Crafty.scene('Level_1');
 	}
  }

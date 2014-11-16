@@ -31,8 +31,9 @@ Crafty.c('Actor', {
 
 Crafty.c('Ground', {
 	init: function() {
-		this.requires('Actor, Color, Solid')
-			.color('green');
+		this.requires('Actor, Color, Solid, Collision')
+			.color('green')
+			//.collision(new Crafty.polygon([50,0], [70,70], [0,100]))
 	}
 });
 
@@ -54,7 +55,21 @@ Crafty.c('Hazard', {
 Crafty.c('Boundary', {
 	init: function() {
 		this.requires('Actor, Color, Boundary')
-			.color('blue', 0)
+			.color('blue')
 	}
 })
 
+Crafty.c('Replay', {
+	init:function() {
+		this.requires('2D, Canvas, Text')
+			.attr({x: 12*90, y: 7.5*90, w: 250, h: 250})
+			.text("GAME OVER")
+			.textColor ('black')
+		this.bind('ReplayPrompt', function(e) {	
+			if(e.key == Crafty.keys.R) {
+
+   			}
+
+		})
+	}
+})

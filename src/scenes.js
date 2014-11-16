@@ -53,10 +53,15 @@ Crafty.scene('Level_1', function() {
 
 	Crafty.e('teddyBears')
 	.attr({x:200,y:100})
+
+    this.nextLevel = this.bind('NextLevel', function() {
+        Crafty.scene('Level_2');
+    });
+
 });
 
 Crafty.scene('Level_2', function() {
-	numTeddy = 3;
+	numTeddy = 1;
 	var player1 = Crafty.e('Player1')
 		.attr({x: 300, y: 1000})
 	//Insures Climbing platforms do not cause clipping
@@ -108,6 +113,10 @@ Crafty.scene('Level_2', function() {
     this.nextLevel = this.bind('NextLevel', function() {
         Crafty.scene('Level_4');
     });
+	this.bind("ReplayScene", function() {
+		console.log("Here?")
+		Crafty.scene('Level_2');
+	});
 });
 
 Crafty.scene('Level_4', function() {
@@ -188,10 +197,10 @@ Crafty.scene('Level_5', function() {
     for (var x = 0; x < w; x++) {
         for (var y = 0; y < h; y++) {
             if ((y == h - 1 || y == h - 2)) {
-				if ( x <= 5 || (18 >= x && x >= 10) || x >= 23) {
+				if (18 >= x || x >= 23) {
                		Crafty.e('Ground').at(x,y);
 				}
-				else if (y == h -1 &&  ((x >= 6 && x <= 11) || (x >= 19 && x <= 24))){
+				else if (y == h -1 && (x >= 19 && x <= 24)){
                		Crafty.e('Hazard').at(x,y);					
 				}
             }
@@ -208,7 +217,7 @@ Crafty.scene('Level_5', function() {
         }
     }
 
-	Crafty.e('Boundary').attr({x:9*tile,y:12*tile,h:tile,w:tile})
+
 	Crafty.e('Boundary').attr({x:19*tile,y:12*tile,h:tile,w:tile})
 	Crafty.e('Boundary').attr({x:18*tile,y:7*tile,h:tile,w:tile})
 
@@ -237,7 +246,4 @@ Crafty.scene('Level_5', function() {
 	Crafty.e('teddyBears')
 	.attr({x:24*tile,y:8*tile})
 
-      this.nextLevel = this.bind('NextLevel', function() {
-        Crafty.scene('Level_6');
-    });
 });

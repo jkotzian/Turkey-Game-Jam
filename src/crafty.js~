@@ -11968,7 +11968,7 @@ var Crafty = require('./core.js'),
 Crafty.c("Text", {
     _text: "",
     defaultSize: "60px",
-    defaultFamily: "Arial",
+    defaultFamily: "sans-serif",
     defaultVariant: "normal",
     defaultLineHeight: "normal",
     ready: true,
