@@ -100,11 +100,11 @@ Crafty.scene('Level_2', function() {
 			}
 			if (y == h - 8 && x < w - 15) {
 				Crafty.e('Ground').at(x, y);
-	.attr({x:400,y:750})
-	Crafty.e('teddyBears')
-	.attr({x:1200,y:550})
+			}
+		}
+	}
 
-      this.nextLevel = this.bind('NextLevel', function() {
+    this.nextLevel = this.bind('NextLevel', function() {
         Crafty.scene('Level_4');
     });
 });
@@ -135,7 +135,6 @@ Crafty.scene('Level_4', function() {
 
 			if (x > 12 && x < 15 && y == h-5) {
                 Crafty.e('Ground').at(x,y);
->>>>>>> 48ef77b7de4371da69de247ec0164c6332817bc0
 			}
 
             if ((x == 18 || x == 17) && y > h-10) {
