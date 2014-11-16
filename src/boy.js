@@ -60,6 +60,8 @@ Crafty.c('Boy', {
 			Crafty.trigger('GoTo4', this);
 		else if (levelID == 4)
 			Crafty.trigger('GoTo5', this);
+		else if (levelID == 5)
+			Crafty.trigger('GoTo7', this);
 	},
 	switchDirection: function() {
 		this.direction *= -1;
