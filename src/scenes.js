@@ -4,9 +4,18 @@ tile = 90;
 levelID = 1;
 var player1;
 var player2;
+var boy;
+
+Crafty.scene('Start', function() {
+	Crafty.e('StartScreen')
+		.attr({x: 300, y: 300})
+	this.bind('GoTo1', function() {
+        Crafty.scene('Level_2');
+    });
+});
 
 Crafty.scene('Level_1', function() {
-	numTeddy = 0;
+	numTeddy = 1;
 	 // A 2D array to keep track of all occupied tiles
     var w = Game.map_grid.width;
     var h = Game.map_grid.height;
@@ -16,38 +25,43 @@ Crafty.scene('Level_1', function() {
             if (y == h - 1 || y == h - 2) {
                 Crafty.e('Ground').at(x,y);
             }
+            if (y == h - 3 && (x > 10)) {
+                Crafty.e('Ground').at(x,y);
+            }
+            if (y == h - 4 && (x > 10)) {
+                Crafty.e('Ground').at(x,y);
+            }
         }
     }
 	
     player1 = Crafty.e('Player1')
-		.attr({x: 300, y: 400})
+		.attr({x: 300, y: 1000})
 	//Insures Climbing platforms do not cause clipping
 	player1.antigravity();
 	player1.gravity();
 		
 	player2 = Crafty.e('Player2')
-		.attr({x: 160,  y:300})
+		.attr({x: 160,  y:1000})
 	//Insures Climbing platforms do not cause clipping
 	player2.antigravity();
 	player2.gravity();
 
-	Crafty.e('Enemy')
-	.attr({x: 500, y: 300})
-	.setDirection(1)
-
-	Crafty.e('Boy')
-	.attr({x: 0, y:750})
+	boy = Crafty.e('Boy')
+		.attr({x: 50, y:1000})
 
 	Crafty.e('teddyBears')
-	.attr({x:200,y:100})
-
-	Crafty.e('teddyBears')
-	.attr({x:200,y:100})
-
-	Crafty.e('teddyBears')
-	.attr({x:200,y:100})
+		.attr({x: 2000, y: 900})
 
 	this.bind('GoTo2', function() {
+		portalCount = 0;
+		door1AddressX = 0;
+		door1AddressY = 0;
+		door2AddressX = 0;
+		door2AddressY = 0;
+		player1.open = false;
+		player2.open = false;
+		player1.destroy();
+		player2.destroy();
         Crafty.scene('Level_2');
     });
 });
@@ -67,8 +81,8 @@ Crafty.scene('Level_2', function() {
 	player2.antigravity();
 	player2.gravity();
 
-	Crafty.e('Boy')
-	.attr({x: 0, y: 1000})
+	boy = Crafty.e('Boy')
+		.attr({x: 0, y: 1000})
 
 	var w = Game.map_grid.width;
     var h = Game.map_grid.height;
@@ -111,6 +125,15 @@ Crafty.scene('Level_2', function() {
 		}
 	}
 	this.bind('GoTo3', function() {
+		portalCount = 0;
+		door1AddressX = 0;
+		door1AddressY = 0;
+		door2AddressX = 0;
+		door2AddressY = 0;
+		player1.open = false;
+		player2.open = false;
+		player1.destroy();
+		player2.destroy();
         Crafty.scene('Level_3');
     });
 });
@@ -130,8 +153,8 @@ Crafty.scene('Level_3', function() {
 	player2.antigravity();
 	player2.gravity();
 
-	Crafty.e('Boy')
-	.attr({x: 100, y: 1000})
+	boy = Crafty.e('Boy')
+		.attr({x: 100, y: 1000})
 
 	var w = Game.map_grid.width;
     var h = Game.map_grid.height;
@@ -181,6 +204,15 @@ Crafty.scene('Level_3', function() {
 		}
 	}
 	this.bind('GoTo4', function() {
+		portalCount = 0;
+		door1AddressX = 0;
+		door1AddressY = 0;
+		door2AddressX = 0;
+		door2AddressY = 0;
+		player1.open = false;
+		player2.open = false;
+		player1.destroy()
+		player2.destroy()
         Crafty.scene('Level_4');
     });
 });
@@ -237,7 +269,7 @@ Crafty.scene('Level_4', function() {
 	player2.antigravity();
 	player2.gravity();
 
-	Crafty.e('Boy')
+	boy = Crafty.e('Boy')
 	.attr({x: 0, y:650})
 
 	Crafty.e('teddyBears')
@@ -248,6 +280,15 @@ Crafty.scene('Level_4', function() {
 	.attr({x:1200,y:850})
 
 	this.bind('GoTo5', function() {
+		portalCount = 0;
+		door1AddressX = 0;
+		door1AddressY = 0;
+		door2AddressX = 0;
+		door2AddressY = 0;
+		player1.open = false;
+		player2.open = false;
+		player1.destroy()
+		player2.destroy()
         Crafty.scene('Level_5');
     });
 });
@@ -299,7 +340,7 @@ Crafty.scene('Level_5', function() {
 	player2.antigravity();
 	player2.gravity();
 
-	Crafty.e('Boy')
+	boy = Crafty.e('Boy')
 	.attr({x: 0, y:1100})
 
 	Crafty.e('teddyBears')

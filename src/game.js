@@ -62,7 +62,7 @@ Game = {
 			doorsopened: [0,0]
 		})
 
-		Crafty.scene('Level_5');
+		Crafty.scene('Start');
 	}
  }
 

@@ -105,6 +105,11 @@ Crafty.c('Boy', {
 	},
 
 	boyDie: function() {
+		portalCount = 0;
+		door1AddressX = 0;
+		door1AddressY = 0;
+		door2AddressX = 0;
+		door2AddressY = 0;
 		if (levelID == 1)
 			Crafty.trigger('GoTo1', this);
 		else if (levelID == 2)
