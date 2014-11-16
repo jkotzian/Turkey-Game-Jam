@@ -31,9 +31,8 @@ Crafty.c('Actor', {
 
 Crafty.c('Ground', {
 	init: function() {
-		this.requires('Actor, Color, Solid, Collision')
-			.color('green')
-			//.collision(new Crafty.polygon([50,0], [70,70], [0,100]))
+		this.requires('Actor, Color, Solid')
+			.color('green');
 	}
 });
 
@@ -47,7 +46,7 @@ Crafty.c('Portal', {
 
 Crafty.c('Hazard', {
 	init: function() {
-		this.requires('Actor, Color, Hazard, Solid')
+		this.requires('Actor, Color, Hazard, Ground')
 			.color('orange')
 	}
 })

@@ -14,19 +14,15 @@ Crafty.c('Boy', {
 		this.requires('2D, Canvas, Color, Gravity, Collision')
 		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height})
 		.color('yellow')
-		.gravity('Solid')
+		.gravity('Ground')
 		.gravityConst(.3)
-		.switchOnSolids()
+		.switchOnGrounds()
 		.collidePlayer()
 		.collideEnemy()
 		.collideHazard()
 		.bind("EnterFrame", function() {
 			//Move the enemy in the game loop
 			//If he hits the left edge of the screen
-			if (this.x < 0) {
-				//Reverse direction
-				this.direction *= -1;
-			}
 			//If he hits the right edge of the screen
 			if (this.x > Crafty.viewport.width - this.w) {
 				if (numTeddy == 0) {
@@ -34,7 +30,7 @@ Crafty.c('Boy', {
 					this.reachedEnd();
 				}
 				else {
-					this.direction *= -1;
+					this.switchDirection();
 				}
 			}
 			//Right
@@ -55,6 +51,9 @@ Crafty.c('Boy', {
 	reachedEnd: function() {
 		//Trigger the callback to go to the next level
 		Crafty.trigger('NextLevel', this);
+	},
+	switchDirection: function() {
+		this.direction *= -1;
 	},
 	collideHazard: function() {
 		this.onHit('Hazard', this.boyDie)
@@ -92,9 +91,9 @@ Crafty.c('Boy', {
 	},
 
 	// Registers a stop-movement function to be called when
-	// this entity hits an entity with the "Solid" component
-	switchOnSolids: function() {
-		this.onHit('Solid', this.switchMovement);
+	// this entity hits an entity with the "Ground" component
+	switchOnGrounds: function() {
+		this.onHit('Ground', this.switchMovement);
 		return this;
 	},
 
