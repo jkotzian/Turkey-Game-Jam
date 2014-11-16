@@ -10,14 +10,10 @@ Crafty.c('Player2' , {
 	open: false,
 	init: function() {
 		this.numPlayers += 1;
-		this.requires('2D, Canvas, Color, Multiway, Gravity, Collision')
+		this.requires('2D, Canvas, Color, Twoway2, Gravity, Collision')
 		.attr({x: 0, y: 0, w: 50, h: 50})
 		.color('red')
-		.multiway(7, {
-			W: -90,
-			A: 180,
-			D: 0,
-		})
+		.twoway2(4)
 		.gravity('Solid')
 		.gravityConst(.3)
 		.stopOnSolids()
@@ -53,18 +49,14 @@ Crafty.c('Player2' , {
 		portalCount += 1;
 		door2AddressX = this.x;
 		door2AddressY = this.y;
-		console.log(portalCount);
-		console.log(door2AddressX);
-		console.log(door2AddressY);
 	},
 
 	unportalize: function() {
 		this.color('red')
-		this.gravity("Ground")
+		this.gravity('Solid')
 		this.keyDown = false
 		this.open = false;
 		portalCount -= 1;
-		console.log(portalCount);
 	},
 	// Registers a stop-movement function to be called when
 	// this entity hits an entity with the "Solid" component

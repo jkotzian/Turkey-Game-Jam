@@ -10,14 +10,10 @@ Crafty.c('Player1' , {
 	open: false,
 	init: function() {
 		this.numPlayers += 1;
-		this.requires('2D, Canvas, Color, Multiway, Gravity, Collision')
+		this.requires('2D, Canvas, Color, Twoway, Gravity, Collision')
 		.attr({x: 0, y: 0, w: 50, h: 50})
 		.color('red')
-		.multiway(7, {
-			UP_ARROW: -90,
-			LEFT_ARROW: 180,
-			RIGHT_ARROW: 0,
-		})
+		.twoway(4)
 		.gravity('Solid')
 		.gravityConst(.3)
 		.stopOnSolids()
@@ -43,13 +39,6 @@ Crafty.c('Player1' , {
 		    	this.stopMovement();
 			}
 	    })
-		.bind('PlayerDeath', function() {
-			.multiway(7, {
-				UP_ARROW: -90,
-				LEFT_ARROW: 180,
-				RIGHT_ARROW: 0,
-			})			
-		}
 	},
 
 	portalize: function() {
@@ -60,37 +49,27 @@ Crafty.c('Player1' , {
 		portalCount += 1;
 		door1AddressX = this.x;
 		door1AddressY = this.y;
-		console.log(portalCount);
-		console.log(door1AddressX);
-		console.log(door1AddressY);
 	},
 
 	unportalize: function() {
 		this.color('red')
-		this.gravity("Ground")
+		this.gravity('Solid')
 		this.keyDown = false
 		this.open = false;
 		portalCount -= 1;
-		console.log(portalCount);
 	},
 	// Registers a stop-movement function to be called when
 	// this entity hits an entity with the "Solid" component
 	stopOnSolids: function() {
-			console.log('???');
 		this.onHit('Solid', this.stopMovement);
 		return this;
 	},
 
-	player1Dies: function() {
-		this.trigger("PlayerDeath");
-		this.destroy();
-	}
-
 	// Stops the movement
 	stopMovement: function() {
+		//console.log('HI!');
 		this._speed = 0;
 		if (this._movement) {
-			console.log(this._speed);
 			this.x -= this._movement.x;
 			this.y -= this._movement.y;
 		}
