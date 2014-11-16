@@ -42,7 +42,7 @@ Crafty.c('Player1' , {
 				this.x < 0){
 				this.x -= this._movement.x;
 			}
-			if (this.y > Crafty.viewport.height - this.h ) {
+			if (this.y > Crafty.viewport.height - this.h || this.y < 0) {
 				this.y -= this._movement.y;
 			}
 	    	if (this.keyDown && this.open == false) {

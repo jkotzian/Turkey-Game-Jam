@@ -22,10 +22,10 @@ Crafty.c('Enemy', {
 		.bind("EnterFrame", function() {
 			//Move the enemy in the game loop
 			//If it hits the edge of the screen
-			if (this.x > Crafty.viewport.width - this.w ||
-				this.x < 0){
+			if (this.x > Crafty.viewport.width - this.w || this.x < 0){
+				console.log("OH HAI")
 				//Switch directions
-				this.switchDirection;
+				this.switchDirection();
 			}
 			//Right
 			if (this.direction == 1) {
@@ -52,6 +52,7 @@ Crafty.c('Enemy', {
 		this.onHit('Boundary', this.switchDirection)
 		return this;
 	},
+
 	collideHazard: function() {
 		this.onHit('Hazard', this.enemyDie)
 		return this;

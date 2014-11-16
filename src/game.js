@@ -28,7 +28,6 @@ Game = {
 			Game.map_grid.height * 
 			Game.map_grid.tile.height);
 		Crafty.background('lightgray');
-
 		Crafty.scene('Level_1');
 	}
  }

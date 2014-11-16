@@ -1,5 +1,6 @@
 
 numTeddy = 0;
+tile = 90;
 
 Crafty.scene('Level_1', function() {
 	numTeddy = 0;
@@ -191,10 +192,10 @@ Crafty.scene('Level_4', function() {
     for (var x = 0; x < w; x++) {
         for (var y = 0; y < h; y++) {
             if ((y == h - 1 || y == h - 2)) {
-				if ( x < 9 || (21 > x && x > 12) || x > 23) {
+				if ( x < 10 || (22 > x && x > 12) || x > 23) {
                		Crafty.e('Ground').at(x,y);
 				}
-				else if (y == h -1 &&  ((x > 6 && x < 13) || (x > 20 && x < 24))){
+				else if (y == h -1 &&  ((x > 7 && x < 13) || (x > 21 && x < 24))){
                		Crafty.e('Hazard').at(x,y);					
 				}
             }
@@ -209,7 +210,7 @@ Crafty.scene('Level_4', function() {
                 Crafty.e('Ground').at(x,y);
 			}
 
-            if ((x == 18 || x == 17) && y > h-10) {
+            if ((x == 18 || x == 17) && y > h-9) {
                 ground = Crafty.e('Ground').at(x,y);
             }
 			if (y < h - 7 && y > h-9 && x > 17 && x < 23) {
@@ -245,6 +246,70 @@ Crafty.scene('Level_4', function() {
 	.attr({x:1200,y:850})
 
       this.nextLevel = this.bind('NextLevel', function() {
-        Crafty.scene('Level_4');
+        Crafty.scene('Level_5');
+    });
+});
+
+Crafty.scene('Level_5', function() {
+	numTeddy = 3;
+	 // A 2D array to keep track of all occupied tiles
+
+    var w = Game.map_grid.width;
+    var h = Game.map_grid.height;
+    //Place some ground on the map
+    for (var x = 0; x < w; x++) {
+        for (var y = 0; y < h; y++) {
+            if ((y == h - 1 || y == h - 2)) {
+				if ( x <= 5 || (18 >= x && x >= 10) || x >= 23) {
+               		Crafty.e('Ground').at(x,y);
+				}
+				else if (y == h -1 &&  ((x >= 6 && x <= 11) || (x >= 19 && x <= 24))){
+               		Crafty.e('Hazard').at(x,y);					
+				}
+            }
+				if  (y == h - 5 && x >= 3 && x <= 7) {
+               		Crafty.e('Ground').at(x,y);
+				}
+				if  (y == h - 7 && x >= 12 && x <= 17) {
+               		Crafty.e('Ground').at(x,y);
+				}
+				if (y == h - 8 && x == 12)
+               		Crafty.e('Ground').at(x,y);
+				if (y == h - 6 && x == 7)
+               		Crafty.e('Ground').at(x,y);
+        }
+    }
+
+	Crafty.e('Boundary').attr({x:9*tile,y:12*tile,h:tile,w:tile})
+	Crafty.e('Boundary').attr({x:19*tile,y:12*tile,h:tile,w:tile})
+	Crafty.e('Boundary').attr({x:18*tile,y:7*tile,h:tile,w:tile})
+
+	Crafty.e('Enemy').attr({x:12*tile,y:13*tile}).setDirection(1);
+	Crafty.e('Enemy').attr({x:14*tile,y:7*tile}).setDirection(-1);
+	
+    var player1 = Crafty.e('Player1')
+		.attr({x: 300, y: 650})
+	//Insures Climbing platforms do not cause clipping
+	player1.antigravity();
+	player1.gravity();
+		
+	var player2 = Crafty.e('Player2')
+		.attr({x: 160,  y:650})
+	//Insures Climbing platforms do not cause clipping
+	player2.antigravity();
+	player2.gravity();
+
+	Crafty.e('Boy')
+	.attr({x: 0, y:1100})
+
+	Crafty.e('teddyBears')
+	.attr({x:tile*14,y:tile*12})
+	Crafty.e('teddyBears')
+	.attr({x:6*tile,y:9*tile})
+	Crafty.e('teddyBears')
+	.attr({x:24*tile,y:8*tile})
+
+      this.nextLevel = this.bind('NextLevel', function() {
+        Crafty.scene('Level_6');
     });
 });
