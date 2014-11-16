@@ -3,7 +3,7 @@ door1AddressY = 0;
 door2AddressX = 0;
 door2AddressY = 0;
 
-entered = 0;
+enteredEnemy = 0;
 portalCount = 0;
 
 Crafty.c('Enemy', { 
@@ -11,7 +11,7 @@ Crafty.c('Enemy', {
 	direction: 1,
 	init: function() {
 		this.requires('2D, Canvas, Color, Gravity, Collision')
-		.attr({x: 0, y: 0, w: 50, h: 50})
+		.attr({x: 0, y: 0, w: 50, h:50})
 		.color('black')
 		.gravity('Solid')
 		.gravityConst(.3)
@@ -34,9 +34,8 @@ Crafty.c('Enemy', {
 			else {
 				this.x -= this.speed;
 			}
-			if (entered == 1 && !this.hit('Player1') && !this.hit('Player2')) {
-				console.log('portal ready');
-				entered = 0;
+			if (enteredEnemy == 1 && !this.hit('Player1') && !this.hit('Player2')) {
+				enteredEnemy = 0;
 			}
 		})
 	},
@@ -47,24 +46,30 @@ Crafty.c('Enemy', {
 	},
 
 	collidePlayer: function() {
-	 	this.onHit('Player1', this.teleport1)
-	 	this.onHit('Player2', this.teleport2)
+	 	this.onHit('Player1', this.player1Hit)
+	 	this.onHit('Player2', this.player2Hit)
 	 	return this;
 	},
 
-	teleport1: function() {
-		if (portalCount == 2 && entered == 0) {
+	player1Hit: function() {
+		if (portalCount == 2 && enteredEnemy == 0) {
 			this.x = door2AddressX;
 			this.y = door2AddressY;
-			entered = 1;
+			enteredEnemy = 1;
+		}
+		else if (portalCount != 2 && enteredEnemy == 0){
+			Crafty.trigger('Death1');
 		}
 	},
 
-	teleport2: function() {
-		if (portalCount == 2 && entered == 0) {
+	player2Hit: function() {
+		if (portalCount == 2 && enteredEnemy == 0) {
 			this.x = door1AddressX;
 			this.y = door1AddressY;
-			entered = 1;
+			enteredEnemy = 1;
+		}
+		else if (portalCount != 2 && enteredEnemy == 0){
+			Crafty.trigger('Death2');
 		}
 	},
 

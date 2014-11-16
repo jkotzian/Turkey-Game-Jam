@@ -4,8 +4,6 @@ Crafty.scene('Level_1', function() {
 		for (var y = 0; y < Game.map_grid.height; y++) {
 			if (y == Game.map_grid.height - 1 || (y == Game.map_grid.height - 3 && x == 7) ||
 				(y == Game.map_grid.height - 2 && x == 4)) {
-				Crafty.e('Ground').at(x, y);
-			}
 			// if (y == Game.map_grid.height - 1 && x > 4) {
 			// 	Crafty.e('Hazard').at(x, y);
 			// }
@@ -25,8 +23,8 @@ Crafty.scene('Level_1', function() {
   	var enemy1 = Crafty.e('Enemy')
   	 	.attr({x: 200, y: 200})
 
-  	// Crafty.e('Boy')
-  	// 	.attr({x: 100, y: 200})
+  	 Crafty.e('Boy')
+  	 	.attr({x: 100, y: 200})
 
   	//Crafty.e('Portal')
   	//	.attr({x: 100, y: 200})

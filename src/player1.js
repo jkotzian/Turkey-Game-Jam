@@ -28,6 +28,14 @@ Crafty.c('Player1' , {
 		    }
 	    })
 	    .bind('EnterFrame', function(frame) {
+			//Won't go offscreen
+			if (this.x > Crafty.viewport.width - this.w ||
+				this.x < 0){
+				this.x -= this._movement.x;
+			}
+			if (this.y > Crafty.viewport.height - this.h ) {
+				this.y -= this._movement.y;
+			}
 	    	if (this.keyDown && this.open == false) {
 	    		this.portalize();
 	    	}
@@ -39,6 +47,9 @@ Crafty.c('Player1' , {
 		    	this.stopMovement();
 			}
 	    })
+		.bind('Death1', function(e) {
+			this.destroy()
+		})
 	},
 
 	portalize: function() {
@@ -64,7 +75,10 @@ Crafty.c('Player1' , {
 		this.onHit('Solid', this.stopMovement);
 		return this;
 	},
-
+	player1Dies: function() {
+		this.trigger("PlayerDeath");
+		this.destroy();
+	},
 	// Stops the movement
 	stopMovement: function() {
 		//console.log('HI!');
