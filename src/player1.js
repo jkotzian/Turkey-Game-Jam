@@ -12,7 +12,7 @@ Crafty.c('Player1' , {
 	init: function() {
 		this.numPlayers += 1;
 		this.requires('Actor, door1, Twoway, Gravity, Collision, Player, SpriteAnimation')
-		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height * 2})
+		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height * 1.8})
 		.twoway(10)
 		.reel('door1_open',500,0,4,1)
 		.reel('door1_standing_left',500,0,0,4)

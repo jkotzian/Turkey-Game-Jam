@@ -13,7 +13,6 @@
 	<script src="src/teddyBear.js"></script>
     <script>
 		window.addEventListener('load',Game.start);
-    
     </script>
     <style type="text/css" media="screen">
     body {
@@ -39,6 +38,7 @@
       color: #AAA;
     }
   </style>
+
   </head>
   <body>
    <h2>Jake's Nightmare</h2>
@@ -50,5 +50,11 @@
 	<div id="cr-stage"></div>
 	 
 	<p class="bottom">Created for the Turkey Jame Game Competition </a>.
+    <audio id="audioid" src="src/lana.mp3" preload="auto"> </audio>
+    <script>
+    var sample = document.getElementById("audioid");
+    sample.play();
+    </script>
   </body>
+
 </html>
