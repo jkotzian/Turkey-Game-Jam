@@ -18,7 +18,6 @@ Crafty.c('Enemy', {
 		.reel('enemy_right' ,400,0,1,3)
 		.animate('enemy_right',-1)
 		.switchOnSolids()
-		.collidePlayer()
 		.collideHazard()
 		.collideBoundary()
 		.bind("EnterFrame", function() {
@@ -63,31 +62,31 @@ Crafty.c('Enemy', {
 		this.onHit('Hazard', this.enemyDie)
 		return this;
 	},
-	collidePlayer: function() {
-	 	this.onHit('Player1', this.player1Hit)
-	 	this.onHit('Player2', this.player2Hit)
-	 	return this;
-	},
-	player1Hit: function() {
-		if (portalCount == 2 && enteredEnemy == 0) {
-			this.x = door2AddressX;
-			this.y = door2AddressY;
-			enteredEnemy = 1;
-		}
-		//else if (portalCount != 2 && enteredEnemy == 0){
-			//Crafty.trigger('Death1');
-		//}
-	},
-	player2Hit: function() {
-		if (portalCount == 2 && enteredEnemy == 0) {
-			this.x = door1AddressX;
-			this.y = door1AddressY;
-			enteredEnemy = 1;
-		}
-		//else if (portalCount != 2 && enteredEnemy == 0){
-			//Crafty.trigger('Death2');
-		//}
-	},
+	// collidePlayer: function() {
+	//  	this.onHit('Player1', this.player1Hit)
+	//  	this.onHit('Player2', this.player2Hit)
+	//  	return this;
+	// },
+	// player1Hit: function() {
+	// 	if (portalCount == 2 && enteredEnemy == 0) {
+	// 		this.x = door2AddressX;
+	// 		this.y = door2AddressY;
+	// 		enteredEnemy = 1;
+	// 	}
+	// 	//else if (portalCount != 2 && enteredEnemy == 0){
+	// 		//Crafty.trigger('Death1');
+	// 	//}
+	// },
+	// player2Hit: function() {
+	// 	if (portalCount == 2 && enteredEnemy == 0) {
+	// 		this.x = door1AddressX;
+	// 		this.y = door1AddressY;
+	// 		enteredEnemy = 1;
+	// 	}
+	// 	//else if (portalCount != 2 && enteredEnemy == 0){
+	// 		//Crafty.trigger('Death2');
+	// 	//}
+	// },
 
 	enemyDie: function() {
 		this.destroy()
