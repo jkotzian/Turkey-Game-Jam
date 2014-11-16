@@ -14,6 +14,7 @@ Crafty.c('Player2' , {
 		this.requires('Actor, door2, Twoway2, Gravity, Collision, Player, SpriteAnimation')
 		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height * 2})
 		.twoway2(10)
+		.reel('door2_open',500,0,4,4)
 		.reel('door2_standing_left',500,0,0,4)
 		.reel('door2_standing_right',500,0,1,4)
 		.reel('door2_walking_left',500,0,2,4)
@@ -33,7 +34,8 @@ Crafty.c('Player2' , {
 	    })
 	    .bind('KeyUp', function(e) {
 		    if(e.key == Crafty.keys.S) {
-		        this.keyDown = false
+		    	//this.animate('door2_open',500,0,4,4);
+		        this.keyDown = false;
 		    }
 		    if (e.key == Crafty.keys.W) {
 		    	this.jumpKeyDown = false

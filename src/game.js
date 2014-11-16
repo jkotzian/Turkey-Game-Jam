@@ -57,7 +57,17 @@ Game = {
 			door2: [0, 0]
 		})
 
-		Crafty.scene('Start');
+		Crafty.sprite(100, "src/images/tile_regular.png",
+		{
+			tile: [0,0]
+		})
+
+		Crafty.sprite(100,"src/images/hazards.png",
+		{
+			hazards: [0,0]
+		})
+
+		Crafty.scene('Level_5');
 	}
  }
 

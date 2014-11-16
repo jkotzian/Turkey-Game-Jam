@@ -49,8 +49,7 @@ Crafty.c('Actor', {
 
 Crafty.c('Ground', {
 	init: function() {
-		this.requires('Actor, Color, Solid, Collision')
-			.color('green')
+		this.requires('Actor, tile, Solid, Collision')
 	}
 });
 
@@ -64,8 +63,7 @@ Crafty.c('Portal', {
 
 Crafty.c('Hazard', {
 	init: function() {
-		this.requires('Actor, Color, Hazard, Solid')
-			.color('orange')
+		this.requires('Actor, hazards, Hazard, Solid')
 	}
 })
 

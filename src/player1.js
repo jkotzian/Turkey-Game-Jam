@@ -26,6 +26,7 @@ Crafty.c('Player1' , {
 		.bind('KeyDown', function(e) {
 		    if(e.key == Crafty.keys.DOWN_ARROW) {
 		        this.keyDown = true;
+		        //this.animate('door1_open', -1);
 		    }
 		    if (e.key == Crafty.keys.UP_ARROW) {
 		    	this.jumpKeyDown = true
