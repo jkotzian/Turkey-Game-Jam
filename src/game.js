@@ -27,8 +27,21 @@ Game = {
 			Game.map_grid.tile.width,
 			Game.map_grid.height * 
 			Game.map_grid.tile.height);
-		Crafty.background('lightgray');
+		Crafty.background('url(ibackground_1.png)');  
+		//Crafty.background('lightgray');
+		//Crafty.background('url(images/background_1.png)');
+		//Crafty.background("url('path/to/image.png')");
 
+		Crafty.sprite(100, "images/boy_sprite_walking.png",
+		{
+			boy: [0, 0]
+		});
+
+		Crafty.scene('Level_1')
 		Crafty.scene('Level_5');
 	}
  }
+
+
+        
+  

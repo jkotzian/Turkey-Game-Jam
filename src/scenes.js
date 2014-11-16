@@ -211,7 +211,7 @@ Crafty.scene('Level_5', function() {
 	Crafty.e('Boundary').attr({x:9*tile,y:12*tile,h:tile,w:tile})
 	Crafty.e('Boundary').attr({x:19*tile,y:12*tile,h:tile,w:tile})
 	Crafty.e('Boundary').attr({x:18*tile,y:7*tile,h:tile,w:tile})
-
+	Crafty.e('Boy').attr({x:0.y:90*12}).color('yellow')
 	Crafty.e('Enemy').attr({x:12*tile,y:13*tile}).setDirection(1);
 	Crafty.e('Enemy').attr({x:14*tile,y:7*tile}).setDirection(-1);
 	

@@ -13,8 +13,8 @@ Crafty.c('Boy', {
 	init: function() {
 		this.requires('Actor, Color, Gravity, Collision')
 		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height})
-		.color('yellow')
 		.gravity('Ground')
+		.Color('red')
 		.gravityConst(2)
 		.switchOnGrounds()
 		.collidePlayer()
@@ -24,12 +24,6 @@ Crafty.c('Boy', {
 			//Move the enemy in the game loop
 			//If he hits the left edge of the screen
 			//If he hits the right edge of the screen
-<<<<<<< HEAD
-			if (this.x > Crafty.viewport.width - this.w|| this.x < 0) {
-				console.log("OH HAI")
-				//Go to the next room
-				this.reachedEnd();
-=======
 			if (this.x > Crafty.viewport.width - this.w) {
 				if (numTeddy == 0) {
 					//Go to the next room
@@ -38,7 +32,6 @@ Crafty.c('Boy', {
 				else {
 					this.switchDirection();
 				}
->>>>>>> aa708f996b1c1153bd94137955d86f8d55005439
 			}
 			//Right
 			if (this.direction == 1) {
