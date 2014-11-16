@@ -351,4 +351,121 @@ Crafty.scene('Level_5', function() {
 	Crafty.e('teddyBears')
 	.attr({x:24*tile,y:8*tile})
 
+	this.bind('GoTo6', function() {
+	portalCount = 0;
+	door1AddressX = 0;
+	door1AddressY = 0;
+	door2AddressX = 0;
+	door2AddressY = 0;
+	player1.open = false;
+	player2.open = false;
+	player1.destroy()
+	player2.destroy()
+    Crafty.scene('Level_6');
+    });
+});
+
+Crafty.scene('Level_6', function() {
+    numTeddy = 3;
+    levelID = 6;
+    var w = Game.map_grid.width;
+    var h = Game.map_grid.height;
+    //Place some ground on the map
+    for (var x = 0; x < w; x++) {
+        for (var y = 0; y < h; y++) {
+            if ((y == h - 1 || y == h - 2)) {
+                if (9 >= x || x >= 23) {
+                       Crafty.e('Ground').at(x,y);
+                }
+                else if (y == h -1 && (x >= 9 && x <= 22)){
+                       Crafty.e('Hazard').at(x,y);                    
+                }
+            }
+            if (y <= h - 3 && y >= h - 4 && x >= 5 && x <= 7)
+                       Crafty.e('Ground').at(x,y);
+        
+            if (y == h - 6 && (x >= 10 && x <= 22)) {
+                       Crafty.e('Ground').at(x,y);
+            }
+
+            if (y == h - 9 && (x >= 12 && x <= 15)) {
+                       Crafty.e('Ground').at(x,y);
+            }
+
+            if (y == h - 8 && (x >= 15 && x <= 18)) {
+                       Crafty.e('Ground').at(x,y);
+            }
+
+            if (x == 15 && (y >= h - 11 && y <= h -2)) {
+                       Crafty.e('Ground').at(x,y);
+            }
+            if (x == 15 && y == h -12) {
+                       Crafty.e('Hazard').at(x,y);                    
+            }
+        }
+    }
+    this.bind('GoTo7', function() {
+	portalCount = 0;
+	door1AddressX = 0;
+	door1AddressY = 0;
+	door2AddressX = 0;
+	door2AddressY = 0;
+	player1.open = false;
+	player2.open = false;
+	player1.destroy()
+	player2.destroy()
+    Crafty.scene('Level_7');
+    });
+})
+
+Crafty.scene('Level_7', function() {
+    levelID = 7;
+    var w = Game.map_grid.width;
+    var h = Game.map_grid.height;
+    //Place some ground on the map
+    for (var x = 0; x < w; x++) {
+        for (var y = 0; y < h; y++) {
+            if  (y == h - 10 && x >= 4 && x <= 7) {
+                   Crafty.e('Ground').at(x,y);
+            }        
+            if  (y == h - 8 && x >= 4 && x <= 7) {
+                   Crafty.e('Ground').at(x,y);
+            }        
+            if  (y == h - 6 && x >= 4 && x <= 7) {
+                   Crafty.e('Ground').at(x,y);
+            }
+            if  (y == h - 10 && x >= 10 && x <= 14) {
+                   Crafty.e('Ground').at(x,y);
+            }    
+
+            if  (y == h - 10 && x >= 17 && x <= 19) {
+                   Crafty.e('Ground').at(x,y);
+            }    
+
+            if  (y == h - 6 && x >= 17 && x <= 19) {
+                   Crafty.e('Ground').at(x,y);
+            }    
+
+            if (x == 4 && (y >= h - 10 && y <= h -6)) {
+                       Crafty.e('Ground').at(x,y);
+            }    
+
+            if (x == 10 && (y >= h - 10 && y <= h -6)) {
+                       Crafty.e('Ground').at(x,y);
+            }    
+                
+
+            if (x == 14 && (y >= h - 10 && y <= h -6)) {
+                       Crafty.e('Ground').at(x,y);
+            }    
+
+            if (x == 17 && (y >= h - 10 && y <= h -6)) {
+                       Crafty.e('Ground').at(x,y);
+            }
+
+            if (x == 20 && (y >= h - 9 && y <= h -7)) {
+                       Crafty.e('Ground').at(x,y);
+            }    
+        }
+    }
 });

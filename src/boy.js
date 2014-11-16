@@ -101,16 +101,12 @@ Crafty.c('Boy', {
 		door1AddressY = 0;
 		door2AddressX = 0;
 		door2AddressY = 0;
-		if (levelID == 1)
-			Crafty.trigger('GoTo1', this);
-		else if (levelID == 2)
-			Crafty.trigger('GoTo2', this);
-		else if (levelID == 3) {
+		if (levelID == 3) {
 			player1.open = false;
 			player2.open = false;
 			player1.destroy()
 			player2.destroy()
-			Crafty.trigger('GoTo3', this);
+			//Crafty.trigger('GoTo3', this);
 			player1 = Crafty.e('Player1')
 			.attr({x: 300, y: 1000})
 			//Insures Climbing platforms do not cause clipping
@@ -131,6 +127,7 @@ Crafty.c('Boy', {
 			player2.open = false;
 			player1.destroy()
 			player2.destroy()
+			//Crafty.trigger('GoTo4', this);
 		    player1 = Crafty.e('Player1')
 			.attr({x: 300, y: 650})
 			//Insures Climbing platforms do not cause clipping
@@ -146,6 +143,50 @@ Crafty.c('Boy', {
 			Crafty.e('Boy')
 			.attr({x: 0, y:650})
 		}
+		//FOR THE BOYDEATH CONDITIONAL
+        else if (levelID == 5) {
+            player1.open = false;
+            player2.open = false;
+            player1.destroy()
+            player2.destroy()
+            //Crafty.trigger('GoTo5', this);
+            player1 = Crafty.e('Player1')
+            .attr({x: 300, y: 1100})
+            //Insures Climbing platforms do not cause clipping
+            player1.antigravity();
+            player1.gravity();
+                
+            player2 = Crafty.e('Player2')
+            .attr({x: 160,  y:1100})
+            //Insures Climbing platforms do not cause clipping
+            player2.antigravity();
+            player2.gravity();
+
+            Crafty.e('Boy')
+            .attr({x: 0, y:1100})
+        }
+        		//FOR THE BOYDEATH CONDITIONAL
+        else if (levelID == 6) {
+            player1.open = false;
+            player2.open = false;
+            player1.destroy()
+            player2.destroy()
+            //Crafty.trigger('GoTo6', this);
+            player1 = Crafty.e('Player1')
+            .attr({x: 300, y: 1100})
+            //Insures Climbing platforms do not cause clipping
+            player1.antigravity();
+            player1.gravity();
+                
+            player2 = Crafty.e('Player2')
+            .attr({x: 160,  y:1100})
+            //Insures Climbing platforms do not cause clipping
+            player2.antigravity();
+            player2.gravity();
+
+            Crafty.e('Boy')
+            .attr({x: 0, y:1100})
+        }
 		this.destroy();
 	},
 
