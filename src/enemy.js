@@ -40,6 +40,10 @@ Crafty.c('Enemy', {
 		})
 	},
 
+	setDirection: function(dir) {
+		this.direction = dir;
+	},
+
 	collideHazard: function() {
 		this.onHit('Hazard', this.enemyDie)
 		return this;
@@ -57,9 +61,9 @@ Crafty.c('Enemy', {
 			this.y = door2AddressY;
 			enteredEnemy = 1;
 		}
-		else if (portalCount != 2 && enteredEnemy == 0){
-			Crafty.trigger('Death1');
-		}
+		//else if (portalCount != 2 && enteredEnemy == 0){
+			//Crafty.trigger('Death1');
+		//}
 	},
 
 	player2Hit: function() {
@@ -68,9 +72,9 @@ Crafty.c('Enemy', {
 			this.y = door1AddressY;
 			enteredEnemy = 1;
 		}
-		else if (portalCount != 2 && enteredEnemy == 0){
-			Crafty.trigger('Death2');
-		}
+		//else if (portalCount != 2 && enteredEnemy == 0){
+			//Crafty.trigger('Death2');
+		//}
 	},
 
 	enemyDie: function() {
