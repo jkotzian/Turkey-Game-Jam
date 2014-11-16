@@ -24,10 +24,21 @@ Crafty.c('Boy', {
 			//Move the enemy in the game loop
 			//If he hits the left edge of the screen
 			//If he hits the right edge of the screen
+<<<<<<< HEAD
 			if (this.x > Crafty.viewport.width - this.w|| this.x < 0) {
 				console.log("OH HAI")
 				//Go to the next room
 				this.reachedEnd();
+=======
+			if (this.x > Crafty.viewport.width - this.w) {
+				if (numTeddy == 0) {
+					//Go to the next room
+					this.reachedEnd();
+				}
+				else {
+					this.switchDirection();
+				}
+>>>>>>> aa708f996b1c1153bd94137955d86f8d55005439
 			}
 			//Right
 			if (this.direction == 1) {
@@ -38,7 +49,7 @@ Crafty.c('Boy', {
 				this.x -= this.speed;
 			}
 			if (enteredBoy == 1 && !this.hit('Player1') && !this.hit('Player2')) {
-				console.log('portal ready');
+				//console.log('portal ready');
 				enteredBoy = 0;
 			}
 		})
@@ -46,13 +57,7 @@ Crafty.c('Boy', {
 
 	reachedEnd: function() {
 		//Trigger the callback to go to the next level
-
-		if (numTeddy == 0) {
-			Crafty.trigger('NextLevel', this);
-		}
-		else if (numTeddy > 0) {
-			this.switchDirection();
-		}
+		Crafty.trigger('NextLevel', this);
 	},
 	switchDirection: function() {
 		this.direction *= -1;
@@ -104,6 +109,6 @@ Crafty.c('Boy', {
 	// Stops the movement
 	switchMovement: function() {
 		this.direction *= -1;
-		console.log(this.direction);
+		//console.log(this.direction);
 	},
 })

@@ -4,7 +4,7 @@ Crafty.c("teddyBears", {
 	init: function() {
 		this.numBears += 1;
 		numTeddy += 0;
-		this.requires('2D, Canvas, Color, Collision')
+		this.requires('Actor, Color, Collision')
 			.attr({w:50,h:50})
 			.color('#663300')
 			.getTeddy();

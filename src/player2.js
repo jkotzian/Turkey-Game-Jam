@@ -7,26 +7,33 @@ door2AddressY = 0;
 
 Crafty.c('Player2' , {
 	keyDown: false,
+	jumpKeyDown: false,
 	open: false,
+	colHit: false,
 	init: function() {
 		this.numPlayers += 1;
-
 		this.requires('Actor, Color, Twoway2, Gravity, Collision, Player')
-
 		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height})
 		.color('red')
 		.twoway2(10)
 		.gravity('Solid')
-		.gravityConst(.55)
+		.gravityConst(.70)
 		.stopOnSolids()
+		.stopOnBox()
 		.bind('KeyDown', function(e) {
 		    if(e.key == Crafty.keys.S) {
 		        this.keyDown = true
+		    }
+		    if (e.key == Crafty.keys.W) {
+		    	this.jumpKeyDown = true
 		    }
 	    })
 	    .bind('KeyUp', function(e) {
 		    if(e.key == Crafty.keys.S) {
 		        this.keyDown = false
+		    }
+		    if (e.key == Crafty.keys.W) {
+		    	this.jumpKeyDown = false
 		    }
 	    })
 	    .bind('EnterFrame', function(frame) {
@@ -49,7 +56,7 @@ Crafty.c('Player2' , {
 		    	this.stopMovement();
 			}
 	    })
-		.bind('Death2', function(e) {
+		.bind('Death1', function(e) {
 			this.destroy()
 		})
 	},
@@ -77,14 +84,34 @@ Crafty.c('Player2' , {
 		this.onHit('Solid', this.stopMovement);
 		return this;
 	},
-
+	stopOnBox: function() {
+		this.onHit('Ground', this.stopDamnMovement);
+		return this;
+	},
+	player1Dies: function() {
+		this.trigger("PlayerDeath");
+		this.destroy();
+	},
 	// Stops the movement
 	stopMovement: function() {
-		//console.log('HI!');
+		//console.log(this._speed);
 		this._speed = 0;
 		if (this._movement) {
+			//console.log(this._movement.y);
 			this.x -= this._movement.x;
+			//if (this.jumpKeyDown)
 			this.y -= this._movement.y;
 		}
+		//this.y += 10;
 	},
+	stopDamnMovement: function() {
+		console.log("FUCK YEA");
+		this._speed = 0;
+		if (this._movement) {
+			//console.log(this._movement.y);
+			//this.x -= this._movement.x;
+			//if (this.jumpKeyDown)
+			this.y += this._jumpSpeed;
+		}
+	}
 });
