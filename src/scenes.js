@@ -1,6 +1,9 @@
 
 numTeddy = 0;
 tile = 90;
+levelID = 1;
+var player1;
+var player2;
 
 Crafty.scene('Level_1', function() {
 	numTeddy = 0;
@@ -16,13 +19,13 @@ Crafty.scene('Level_1', function() {
         }
     }
 	
-    var player1 = Crafty.e('Player1')
+    player1 = Crafty.e('Player1')
 		.attr({x: 300, y: 400})
 	//Insures Climbing platforms do not cause clipping
 	player1.antigravity();
 	player1.gravity();
 		
-	var player2 = Crafty.e('Player2')
+	player2 = Crafty.e('Player2')
 		.attr({x: 160,  y:300})
 	//Insures Climbing platforms do not cause clipping
 	player2.antigravity();
@@ -44,20 +47,21 @@ Crafty.scene('Level_1', function() {
 	Crafty.e('teddyBears')
 	.attr({x:200,y:100})
 
-	this.nextLevel = this.bind('NextLevel', function() {
+	this.bind('GoTo2', function() {
         Crafty.scene('Level_2');
     });
 });
 
 Crafty.scene('Level_2', function() {
 	numTeddy = 3;
-	var player1 = Crafty.e('Player1')
+	levelID = 2;
+	player1 = Crafty.e('Player1')
 		.attr({x: 300, y: 1000})
 	//Insures Climbing platforms do not cause clipping
 	player1.antigravity();
 	player1.gravity();
 		
-	var player2 = Crafty.e('Player2')
+	player2 = Crafty.e('Player2')
 		.attr({x: 160,  y:1000})
 	//Insures Climbing platforms do not cause clipping
 	player2.antigravity();
@@ -106,28 +110,28 @@ Crafty.scene('Level_2', function() {
 			}
 		}
 	}
-
-    this.nextLevel = this.bind('NextLevel', function() {
+	this.bind('GoTo3', function() {
         Crafty.scene('Level_3');
     });
 });
 
 Crafty.scene('Level_3', function() {
 	numTeddy = 2;
-	var player1 = Crafty.e('Player1')
+	levelID = 3;
+	player1 = Crafty.e('Player1')
 		.attr({x: 300, y: 1000})
 	//Insures Climbing platforms do not cause clipping
 	player1.antigravity();
 	player1.gravity();
 		
-	var player2 = Crafty.e('Player2')
+	player2 = Crafty.e('Player2')
 		.attr({x: 160,  y:1000})
 	//Insures Climbing platforms do not cause clipping
 	player2.antigravity();
 	player2.gravity();
 
 	Crafty.e('Boy')
-	.attr({x: 0, y: 1000})
+	.attr({x: 100, y: 1000})
 
 	var w = Game.map_grid.width;
     var h = Game.map_grid.height;
@@ -176,16 +180,14 @@ Crafty.scene('Level_3', function() {
 			}
 		}
 	}
-
-    this.nextLevel = this.bind('NextLevel', function() {
+	this.bind('GoTo4', function() {
         Crafty.scene('Level_4');
     });
 });
 
 Crafty.scene('Level_4', function() {
 	numTeddy = 3;
-	 // A 2D array to keep track of all occupied tiles
-
+	levelID = 4;
     var w = Game.map_grid.width;
     var h = Game.map_grid.height;
     //Place some ground on the map
@@ -223,13 +225,13 @@ Crafty.scene('Level_4', function() {
         }
     }
 	
-    var player1 = Crafty.e('Player1')
+    player1 = Crafty.e('Player1')
 		.attr({x: 300, y: 650})
 	//Insures Climbing platforms do not cause clipping
 	player1.antigravity();
 	player1.gravity();
 		
-	var player2 = Crafty.e('Player2')
+	player2 = Crafty.e('Player2')
 		.attr({x: 160,  y:650})
 	//Insures Climbing platforms do not cause clipping
 	player2.antigravity();
@@ -245,25 +247,24 @@ Crafty.scene('Level_4', function() {
 	Crafty.e('teddyBears')
 	.attr({x:1200,y:850})
 
-      this.nextLevel = this.bind('NextLevel', function() {
+	this.bind('GoTo5', function() {
         Crafty.scene('Level_5');
     });
 });
 
 Crafty.scene('Level_5', function() {
 	numTeddy = 3;
-	 // A 2D array to keep track of all occupied tiles
-
+	levelID = 5;
     var w = Game.map_grid.width;
     var h = Game.map_grid.height;
     //Place some ground on the map
     for (var x = 0; x < w; x++) {
         for (var y = 0; y < h; y++) {
             if ((y == h - 1 || y == h - 2)) {
-				if ( x <= 5 || (18 >= x && x >= 10) || x >= 23) {
+				if (18 >= x || x >= 23) {
                		Crafty.e('Ground').at(x,y);
 				}
-				else if (y == h -1 &&  ((x >= 6 && x <= 11) || (x >= 19 && x <= 24))){
+				else if (y == h -1 && (x >= 19 && x <= 24)){
                		Crafty.e('Hazard').at(x,y);					
 				}
             }
@@ -280,20 +281,20 @@ Crafty.scene('Level_5', function() {
         }
     }
 
-	Crafty.e('Boundary').attr({x:9*tile,y:12*tile,h:tile,w:tile})
+
 	Crafty.e('Boundary').attr({x:19*tile,y:12*tile,h:tile,w:tile})
 	Crafty.e('Boundary').attr({x:18*tile,y:7*tile,h:tile,w:tile})
 
 	Crafty.e('Enemy').attr({x:12*tile,y:13*tile}).setDirection(1);
 	Crafty.e('Enemy').attr({x:14*tile,y:7*tile}).setDirection(-1);
 	
-    var player1 = Crafty.e('Player1')
+    player1 = Crafty.e('Player1')
 		.attr({x: 300, y: 650})
 	//Insures Climbing platforms do not cause clipping
 	player1.antigravity();
 	player1.gravity();
 		
-	var player2 = Crafty.e('Player2')
+	player2 = Crafty.e('Player2')
 		.attr({x: 160,  y:650})
 	//Insures Climbing platforms do not cause clipping
 	player2.antigravity();
@@ -309,7 +310,4 @@ Crafty.scene('Level_5', function() {
 	Crafty.e('teddyBears')
 	.attr({x:24*tile,y:8*tile})
 
-      this.nextLevel = this.bind('NextLevel', function() {
-        Crafty.scene('Level_6');
-    });
 });

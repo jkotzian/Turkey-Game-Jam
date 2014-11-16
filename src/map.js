@@ -57,3 +57,11 @@ Crafty.c('Boundary', {
 	}
 })
 
+Crafty.c('Replay', {
+	init:function() {
+		this.requires('2D, Canvas, Text')
+			.attr({x: 12*90, y: 7.5*90, w: 250, h: 250})
+			.text("GAME OVER")
+			.textColor ('black')
+	}
+})

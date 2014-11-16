@@ -9,7 +9,6 @@ Crafty.c('Player1' , {
 	keyDown: false,
 	jumpKeyDown: false,
 	open: false,
-	colHit: false,
 	init: function() {
 		this.numPlayers += 1;
 		this.requires('Actor, Color, Twoway, Gravity, Collision, Player')
@@ -26,6 +25,10 @@ Crafty.c('Player1' , {
 		    }
 		    if (e.key == Crafty.keys.UP_ARROW) {
 		    	this.jumpKeyDown = true
+		    }
+		    if (e.key == Crafty.keys.R) {
+				console.log("R")
+		    	Crafty.trigger("ReplayScene");
 		    }
 	    })
 	    .bind('KeyUp', function(e) {

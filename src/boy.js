@@ -8,7 +8,7 @@ portalCount = 0;
 numTeddy = 0;
 
 Crafty.c('Boy', { 
-	speed: 15,
+	speed: 3,
 	direction: 1,
 	init: function() {
 		this.requires('Actor, Color, Gravity, Collision')
@@ -23,18 +23,10 @@ Crafty.c('Boy', {
 		.bind("EnterFrame", function() {
 			//Move the enemy in the game loop
 			//If he hits the left edge of the screen
+			if (this.x < 0) {
+				this.switchDirection();
+			}
 			//If he hits the right edge of the screen
-<<<<<<< HEAD
-			if (this.x > Crafty.viewport.width - this.w ||
-				this.x < 0) {
-				this.reachedEnd();
-=======
-<<<<<<< HEAD
-			if (this.x > Crafty.viewport.width - this.w|| this.x < 0) {
-				console.log("OH HAI")
-				//Go to the next room
-				this.reachedEnd();
-=======
 			if (this.x > Crafty.viewport.width - this.w) {
 				if (numTeddy == 0) {
 					//Go to the next room
@@ -43,8 +35,6 @@ Crafty.c('Boy', {
 				else {
 					this.switchDirection();
 				}
->>>>>>> aa708f996b1c1153bd94137955d86f8d55005439
->>>>>>> c85f850b776337b2046e1d151301ca5dcda3b4e5
 			}
 			//Right
 			if (this.direction == 1) {
@@ -62,14 +52,14 @@ Crafty.c('Boy', {
 	},
 
 	reachedEnd: function() {
-		if (numTeddy == 0) {
-			//Go to the next room
-			//Trigger the callback to go to the next level
-			Crafty.trigger('NextLevel', this);
-		}
-		else {
-			this.switchDirection();
-		}
+		if (levelID == 1)
+			Crafty.trigger('GoTo2', this);
+		else if (levelID == 2)
+			Crafty.trigger('GoTo3', this);
+		else if (levelID == 3)
+			Crafty.trigger('GoTo4', this);
+		else if (levelID == 4)
+			Crafty.trigger('GoTo5', this);
 	},
 	switchDirection: function() {
 		this.direction *= -1;
@@ -106,6 +96,51 @@ Crafty.c('Boy', {
 	},
 
 	boyDie: function() {
+		if (levelID == 1)
+			Crafty.trigger('GoTo1', this);
+		else if (levelID == 2)
+			Crafty.trigger('GoTo2', this);
+		else if (levelID == 3) {
+			player1.open = false;
+			player2.open = false;
+			player1.destroy()
+			player2.destroy()
+			Crafty.trigger('GoTo3', this);
+			player1 = Crafty.e('Player1')
+			.attr({x: 300, y: 1000})
+			//Insures Climbing platforms do not cause clipping
+			player1.antigravity();
+			player1.gravity();
+				
+			player2 = Crafty.e('Player2')
+				.attr({x: 160,  y:1000})
+			//Insures Climbing platforms do not cause clipping
+			player2.antigravity();
+			player2.gravity();
+
+			Crafty.e('Boy')
+			.attr({x: 100, y: 1000})
+		}
+		else if (levelID == 4) {
+			player1.open = false;
+			player2.open = false;
+			player1.destroy()
+			player2.destroy()
+		    player1 = Crafty.e('Player1')
+			.attr({x: 300, y: 650})
+			//Insures Climbing platforms do not cause clipping
+			player1.antigravity();
+			player1.gravity();
+				
+			player2 = Crafty.e('Player2')
+				.attr({x: 160,  y:650})
+			//Insures Climbing platforms do not cause clipping
+			player2.antigravity();
+			player2.gravity();
+
+			Crafty.e('Boy')
+			.attr({x: 0, y:650})
+		}
 		this.destroy();
 	},
 
