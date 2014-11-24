@@ -15,6 +15,10 @@ Crafty.scene('Start', function() {
 });
 
 Crafty.scene('Level_1', function() {
+	open1_count = 0;
+	open2_count = 0;
+	isOpen = false;
+	isOpen2 = false;
 	numTeddy = 1;
 	 // A 2D array to keep track of all occupied tiles
     var w = Game.map_grid.width;
@@ -67,6 +71,10 @@ Crafty.scene('Level_1', function() {
 });
 
 Crafty.scene('Level_2', function() {
+	open1_count = 0;
+	open2_count = 0;
+	isOpen = false;
+	isOpen2 = false;
 	numTeddy = 3;
 	levelID = 2;
 	player1 = Crafty.e('Player1')
@@ -139,6 +147,10 @@ Crafty.scene('Level_2', function() {
 });
 
 Crafty.scene('Level_3', function() {
+	open1_count = 0;
+	open2_count = 0;
+	isOpen = false;
+	isOpen2 = false;
 	numTeddy = 2;
 	levelID = 3;
 	player1 = Crafty.e('Player1')
@@ -218,6 +230,10 @@ Crafty.scene('Level_3', function() {
 });
 
 Crafty.scene('Level_4', function() {
+	open1_count = 0;
+	open2_count = 0;
+	isOpen = false;
+	isOpen2 = false;
 	numTeddy = 3;
 	levelID = 4;
     var w = Game.map_grid.width;
@@ -294,6 +310,10 @@ Crafty.scene('Level_4', function() {
 });
 
 Crafty.scene('Level_5', function() {
+	open1_count = 0;
+	open2_count = 0;
+	isOpen = false;
+	isOpen2 = false;
 	numTeddy = 3;
 	levelID = 5;
     var w = Game.map_grid.width;
@@ -419,6 +439,10 @@ Crafty.scene('Level_5', function() {
 // })
 
 Crafty.scene('Level_7', function() {
+	open1_count = 0;
+	open2_count = 0;
+	isOpen = false;
+	isOpen2 = false;
     levelID = 7;
     var w = Game.map_grid.width;
     var h = Game.map_grid.height;

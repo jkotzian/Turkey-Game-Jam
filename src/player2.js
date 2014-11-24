@@ -1,4 +1,5 @@
 portalCount = 0;
+var keys2 = [];
 
 //Holds the address of the door for 
 //teleportations to occur
@@ -26,7 +27,22 @@ Crafty.c('Player2' , {
 		.stopOnBox()
 		.bind('KeyDown', function(e) {
 		    if(e.key == Crafty.keys.S) {
-		        this.keyDown = true
+		        this.keyDown = true;
+		        ++open2_count;
+		        if((open2_count % 2 == 1) && isOpen2 == false)
+		        {
+		        	door_open.play();
+		        	door_closed.stop();
+		        	isOpen2 = true;
+		        	this.animate('door2_open', -1);
+		        }
+		        else
+		        {
+		        	door_open.stop();
+		        	door_closed.play();
+		        	isOpen2 = false;
+		        	this.animate('door2_standing_left', -1);
+		        }
 		    }
 		    if (e.key == Crafty.keys.W) {
 		    	this.jumpKeyDown = true
@@ -38,27 +54,37 @@ Crafty.c('Player2' , {
 		        this.keyDown = false;
 		    }
 		    if (e.key == Crafty.keys.W) {
-		    	this.jumpKeyDown = false
+		    	this.jumpKeyDown = false;
 		    }
 	    })
-	    .bind('KeyDown', function(e)
+	    .bind('KeyDown', function(e) 
 	    {
+	    	keys2[e.keyCode] = true;
+
 	    	if(e.key == Crafty.keys.D)
 	    	{
-	    		this.animate('door2_walking_right', -1);
+	    		if(isOpen2 == false && keys2[65])
+	    			this.animate('door2_walking_right', -1);
+	    		if(isOpen2 == false)
+	    			this.animate('door2_walking_right', -1);
 	    	}
 	    	if(e.key == Crafty.keys.A)
 	    	{
-	    		this.animate('door2_walking_left', -1);
+	    		if(isOpen2 == false && keys2[68])
+	    			this.animate('door2_walking_left', -1);
+	    		if(isOpen2 == false)
+	    			this.animate('door2_walking_left', -1);
 	    	}
 	    })
 	    .bind('KeyUp', function(e) {
 	    	if(e.key == Crafty.keys.D)
 	    	{
+	    		if(isOpen2 == false)
 	    		this.animate('door2_standing_right', -1);
 	    	}
 	    	if(e.key == Crafty.keys.A)
 	    	{
+	    		if(isOpen2 == false)
 	    		this.animate('door2_standing_left', -1);
 	    	}
 	    })

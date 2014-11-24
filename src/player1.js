@@ -1,4 +1,5 @@
 portalCount = 0;
+var keys1 = [];
 
 //Holds the address of the door for 
 //teleportations to occur
@@ -25,14 +26,31 @@ Crafty.c('Player1' , {
 		.stopOnSolids()
 		.stopOnBox()
 		.bind('KeyDown', function(e) {
-		    if(e.key == Crafty.keys.DOWN_ARROW) {
+		    if(e.key == Crafty.keys.DOWN_ARROW) 
+		    {
 		        this.keyDown = true;
-		        this.animate('door1_open', -1);
+		        ++open1_count;
+		        if((open1_count % 2 == 1) && isOpen == false)
+		        {
+		        	door_open.play();
+		        	door_closed.stop();
+		        	isOpen = true;
+		        	this.animate('door1_open', -1);
+		        }
+		        else
+		        {
+		        	door_closed.play();
+		        	door_open.stop();
+		        	isOpen = false;
+		        	this.animate('door1_standing_left', -1);
+		        }
 		    }
-		    if (e.key == Crafty.keys.UP_ARROW) {
+		    if (e.key == Crafty.keys.UP_ARROW) 
+		    {
 		    	this.jumpKeyDown = true
 		    }
-		    if (e.key == Crafty.keys.R) {
+		    if (e.key == Crafty.keys.R) 
+		    {
 				console.log("R")
 		    	boy.boyDie()
 		    }
@@ -47,23 +65,33 @@ Crafty.c('Player1' , {
 	    })
 	    .bind('KeyDown', function(e)
 	    {
+	    	keys1[e.keyCode] = true;
+
 	    	if(e.key == Crafty.keys.RIGHT_ARROW)
 	    	{
-	    		this.animate('door1_walking_right', -1);
+	    		if(isOpen == false && keys1[37])
+	    			this.animate('door1_walking_right', -1);
+	    		if(isOpen == false)
+	    			this.animate('door1_walking_right', -1);
 	    	}
 	    	if(e.key == Crafty.keys.LEFT_ARROW)
 	    	{
-	    		this.animate('door1_walking_left', -1);
+	    		if(isOpen == false && keys1[39])
+	    			this.animate('door1_walking_left', -1);
+	    		if(isOpen == false)
+	    			this.animate('door1_walking_left', -1);
 	    	}
 	    })
 	    .bind('KeyUp', function(e) {
 	    	if(e.key == Crafty.keys.RIGHT_ARROW)
 	    	{
-	    		this.animate('door1_standing_right', -1);
+	    		if(isOpen == false)
+	    			this.animate('door1_standing_right', -1);
 	    	}
 	    	if(e.key == Crafty.keys.LEFT_ARROW)
 	    	{
-	    		this.animate('door1_standing_left', -1);
+	    		if(isOpen == false)
+	    			this.animate('door1_standing_left', -1);
 	    	}
 	    })
 

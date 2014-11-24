@@ -71,6 +71,9 @@ Game = {
 	}
  }
 
-
+var open1_count = 0;
+var open2_count = 0;
+var isOpen = false;
+var isOpen2 = false;
         
   

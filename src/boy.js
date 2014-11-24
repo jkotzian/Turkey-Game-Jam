@@ -107,6 +107,11 @@ Crafty.c('Boy', {
 	},
 
 	boyDie: function() {
+		open1_count = 0;
+		open2_count = 0;
+		isOpen = false;
+		isOpen2 = false;
+		
 		portalCount = 0;
 		door1AddressX = 0;
 		door1AddressY = 0;
