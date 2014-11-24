@@ -64,28 +64,48 @@ Crafty.c('Player2' , {
 	    	if(e.key == Crafty.keys.D)
 	    	{
 	    		if(isOpen2 == false && keys2[65])
+	    		{
 	    			this.animate('door2_walking_right', -1);
+	    			grass_sound.play();
+	    		}
 	    		if(isOpen2 == false)
+	    		{
 	    			this.animate('door2_walking_right', -1);
+	    			grass_sound.play();
+	    		}
 	    	}
 	    	if(e.key == Crafty.keys.A)
 	    	{
 	    		if(isOpen2 == false && keys2[68])
+	    		{
 	    			this.animate('door2_walking_left', -1);
+	    			grass_sound.play();
+	    		}
 	    		if(isOpen2 == false)
+	    		{
 	    			this.animate('door2_walking_left', -1);
+	    			grass_sound.play();
+	    		}
 	    	}
+	    	if(e.key == Crafty.keys.W)
+	    		grass_sound.stop();
 	    })
 	    .bind('KeyUp', function(e) {
 	    	if(e.key == Crafty.keys.D)
 	    	{
 	    		if(isOpen2 == false)
-	    		this.animate('door2_standing_right', -1);
+	    		{
+	    			this.animate('door2_standing_right', -1);
+	    			grass_sound.stop();
+	    		}	
 	    	}
 	    	if(e.key == Crafty.keys.A)
 	    	{
 	    		if(isOpen2 == false)
-	    		this.animate('door2_standing_left', -1);
+	    		{
+	    			this.animate('door2_standing_left', -1);
+	    			grass_sound.stop();
+	    		}
 	    	}
 	    })
 

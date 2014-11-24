@@ -70,28 +70,48 @@ Crafty.c('Player1' , {
 	    	if(e.key == Crafty.keys.RIGHT_ARROW)
 	    	{
 	    		if(isOpen == false && keys1[37])
+	    		{
 	    			this.animate('door1_walking_right', -1);
+	    			grass_sound.play();
+	    		}
 	    		if(isOpen == false)
+	    		{
 	    			this.animate('door1_walking_right', -1);
+	    			grass_sound.play();
+	    		}
 	    	}
 	    	if(e.key == Crafty.keys.LEFT_ARROW)
 	    	{
 	    		if(isOpen == false && keys1[39])
+	    		{
 	    			this.animate('door1_walking_left', -1);
+	    			grass_sound.play();
+	    		}
 	    		if(isOpen == false)
+	    		{
 	    			this.animate('door1_walking_left', -1);
+	    			grass_sound.play();
+	    		}
 	    	}
+	    	if(e.key == Crafty.keys.UP_ARROW)
+	    		grass_sound.stop();
 	    })
 	    .bind('KeyUp', function(e) {
 	    	if(e.key == Crafty.keys.RIGHT_ARROW)
 	    	{
 	    		if(isOpen == false)
+	    		{
 	    			this.animate('door1_standing_right', -1);
+	    			grass_sound.stop();
+	    		}
 	    	}
 	    	if(e.key == Crafty.keys.LEFT_ARROW)
 	    	{
 	    		if(isOpen == false)
+	    		{
 	    			this.animate('door1_standing_left', -1);
+	    			grass_sound.stop();
+	    		}
 	    	}
 	    })
 
@@ -162,7 +182,6 @@ Crafty.c('Player1' , {
 		//this.y += 10;
 	},
 	stopDamnMovement: function() {
-		console.log("FUCK YEA");
 		this._speed = 0;
 		if (this._movement) {
 			//console.log(this._movement.y);
