@@ -50,7 +50,6 @@ Crafty.c('Player2' , {
 	    })
 	    .bind('KeyUp', function(e) {
 		    if(e.key == Crafty.keys.S) {
-		    	this.animate('door2_open',500,0,4,4);
 		        this.keyDown = false;
 		    }
 		    if (e.key == Crafty.keys.W) {
