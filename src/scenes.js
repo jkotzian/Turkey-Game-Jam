@@ -10,7 +10,7 @@ Crafty.scene('Start', function() {
 	Crafty.e('StartScreen')
 		.attr({x: 300, y: 300})
 	this.bind('GoTo1', function() {
-        Crafty.scene('Level_2');
+        Crafty.scene('Level_1');
     });
 });
 
