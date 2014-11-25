@@ -1,4 +1,3 @@
-
 numTeddy = 0;
 tile = 90;
 levelID = 1;
@@ -6,9 +5,22 @@ var player1;
 var player2;
 var boy;
 
-Crafty.scene('Start', function() {
+Crafty.c('Title', { 
+	speed: 3,
+	direction: 1,
+	init: function() 
+	{
+		this.requires('Actor, title')
+		.attr({x: 0, y: 0, w: Game.map_grid.tile.width * 20, h: Game.map_grid.tile.height * 20})
+	}
+});
+
+Crafty.scene('Start', function() 
+{
 	Crafty.e('StartScreen')
 		.attr({x: 300, y: 300})
+	Crafty.e('Title')
+		.attr({x:400,y:350})
 	this.bind('GoTo1', function() {
         Crafty.scene('Level_1');
     });

@@ -67,6 +67,11 @@ Game = {
 			hazards: [0,0]
 		})
 
+		Crafty.sprite(1409,"src/images/title_logo.png",
+		{
+			title: [0,0]
+		})
+
 		Crafty.scene('Start');
 	}
  }
