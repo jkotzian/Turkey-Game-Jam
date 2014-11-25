@@ -36,18 +36,7 @@ Crafty.c('Player1' , {
 				console.log("R")
 		    	boy.boyDie()
 		    }
-	    })
-	    .bind('KeyUp', function(e) {
-		    if(e.key == Crafty.keys.DOWN_ARROW) {
-		        this.keyDown = false
-		    }
-		    if (e.key == Crafty.keys.UP_ARROW) {
-		    	this.jumpKeyDown = false
-		    }
-	    })
-	    .bind('KeyDown', function(e)
-	    {
-	    	if(e.key == Crafty.keys.RIGHT_ARROW)
+		   	if(e.key == Crafty.keys.RIGHT_ARROW)
 	    	{
 	    		this.animate('door1_walking_right', -1);
 	    	}
@@ -57,7 +46,13 @@ Crafty.c('Player1' , {
 	    	}
 	    })
 	    .bind('KeyUp', function(e) {
-	    	if(e.key == Crafty.keys.RIGHT_ARROW)
+		    if(e.key == Crafty.keys.DOWN_ARROW) {
+		        this.keyDown = false
+		    }
+		    if (e.key == Crafty.keys.UP_ARROW) {
+		    	this.jumpKeyDown = false
+		    }
+		   	if(e.key == Crafty.keys.RIGHT_ARROW)
 	    	{
 	    		this.animate('door1_standing_right', -1);
 	    	}
@@ -66,8 +61,10 @@ Crafty.c('Player1' , {
 	    		this.animate('door1_standing_left', -1);
 	    	}
 	    })
-
 	    .bind('EnterFrame', function(frame) {
+	    	//console.log("jumpspeed = " + this._jumpSpeed);
+	    	console.log("gravity = " + this._gy);
+	    	//console.log("falling = " + this._falling);
 			//Won't go offscreen
 			if (this.x > Crafty.viewport.width - this.w ||
 				this.x < 0){
@@ -86,6 +83,7 @@ Crafty.c('Player1' , {
 	    	if (this.open) {
 		    	this.stopMovement();
 			}
+
 	    })
 		.bind('Death1', function(e) {
 			this.destroy()
@@ -114,14 +112,14 @@ Crafty.c('Player1' , {
 		return this;
 	},
 	stopOnBox: function() {
-		this.onHit('Ground', this.stopDamnMovement);
+		this.onHit('Ground', this.stopJumpMovement);
 		return this;
 	},
 	player1Dies: function() {
 		this.trigger("PlayerDeath");
 		this.destroy();
 	},
-	// Stops the movement
+	// Stops the movement when player hits general solid stuff
 	stopMovement: function() {
 		//console.log(this._speed);
 		this._speed = 0;
@@ -133,14 +131,19 @@ Crafty.c('Player1' , {
 		}
 		//this.y += 10;
 	},
-	stopDamnMovement: function() {
-		console.log("FUCK YEA");
+	// Stops the movement when the player hits the ground (so only when he jumps up into the ground)
+	stopJumpMovement: function() {
 		this._speed = 0;
 		if (this._movement) {
 			//console.log(this._movement.y);
 			//this.x -= this._movement.x;
 			//if (this.jumpKeyDown)
-			this.y += this._jumpSpeed;
+			//Change the player's y position based off of their jump speed
+			//and the force of gravity
+			if (this._falling)
+				this.y += this._gy;
+			else
+				this.y -= this._gy;
 		}
 	}
 });

@@ -10,7 +10,62 @@ Crafty.scene('Start', function() {
 	Crafty.e('StartScreen')
 		.attr({x: 300, y: 300})
 	this.bind('GoTo1', function() {
-        Crafty.scene('Level_1');
+        Crafty.scene('Test');
+    });
+});
+
+Crafty.scene('Test', function() {
+	numTeddy = 1;
+	 // A 2D array to keep track of all occupied tiles
+    var w = Game.map_grid.width;
+    var h = Game.map_grid.height;
+    //Place some ground on the map
+    for (var x = 0; x < w; x++) {
+        for (var y = 0; y < h; y++) {
+            if (y == h - 1 || y == h - 2) {
+                Crafty.e('Ground').at(x,y);
+            }
+            if (y == h - 7 && (x == 5)) {
+            	Crafty.e('Ground').at(x,y);
+            }
+            if (y == h - 6 && (x == 10)) {
+            	Crafty.e('Ground').at(x,y);
+            }
+            if (y == h - 5 && (x == 15)) {
+            	Crafty.e('Ground').at(x,y);
+            }
+        }
+    }
+	
+    player1 = Crafty.e('Player1')
+		.attr({x: 300, y: 1000})
+	//Insures Climbing platforms do not cause clipping
+	player1.antigravity();
+	player1.gravity();
+		
+	player2 = Crafty.e('Player2')
+		.attr({x: 160,  y:1000})
+	//Insures Climbing platforms do not cause clipping
+	player2.antigravity();
+	player2.gravity();
+
+	boy = Crafty.e('Boy')
+		.attr({x: 50, y:1000})
+
+	Crafty.e('teddyBears')
+		.attr({x: 2000, y: 900})
+
+	this.bind('GoTo2', function() {
+		portalCount = 0;
+		door1AddressX = 0;
+		door1AddressY = 0;
+		door2AddressX = 0;
+		door2AddressY = 0;
+		player1.open = false;
+		player2.open = false;
+		player1.destroy();
+		player2.destroy();
+        Crafty.scene('Level_2');
     });
 });
 

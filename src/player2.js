@@ -31,19 +31,7 @@ Crafty.c('Player2' , {
 		    if (e.key == Crafty.keys.W) {
 		    	this.jumpKeyDown = true
 		    }
-	    })
-	    .bind('KeyUp', function(e) {
-		    if(e.key == Crafty.keys.S) {
-		    	this.animate('door2_open',500,0,4,4);
-		        this.keyDown = false;
-		    }
-		    if (e.key == Crafty.keys.W) {
-		    	this.jumpKeyDown = false
-		    }
-	    })
-	    .bind('KeyDown', function(e)
-	    {
-	    	if(e.key == Crafty.keys.D)
+		   	if(e.key == Crafty.keys.D)
 	    	{
 	    		this.animate('door2_walking_right', -1);
 	    	}
@@ -53,7 +41,14 @@ Crafty.c('Player2' , {
 	    	}
 	    })
 	    .bind('KeyUp', function(e) {
-	    	if(e.key == Crafty.keys.D)
+		    if(e.key == Crafty.keys.S) {
+		    	this.animate('door2_open',500,0,4,4);
+		        this.keyDown = false;
+		    }
+		    if (e.key == Crafty.keys.W) {
+		    	this.jumpKeyDown = false
+		    }
+		   	if(e.key == Crafty.keys.D)
 	    	{
 	    		this.animate('door2_standing_right', -1);
 	    	}
@@ -62,7 +57,6 @@ Crafty.c('Player2' , {
 	    		this.animate('door2_standing_left', -1);
 	    	}
 	    })
-
 	    .bind('EnterFrame', function(frame) {
 			//Won't go offscreen
 			if (this.x > Crafty.viewport.width - this.w ||

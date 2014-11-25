@@ -67,7 +67,7 @@ Game = {
 			hazards: [0,0]
 		})
 
-		Crafty.scene('Start');
+		Crafty.scene('Test');
 	}
  }
 
