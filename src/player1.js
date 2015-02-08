@@ -7,12 +7,11 @@ door1AddressX = 0;
 door1AddressY = 0;
 
 Crafty.c('Player1' , {
+	open : false,
+	jumpKeyDown : false,
+	keyDown : false,
 	init: function() {
 		direction = 1;
-		open = false;
-		jumpKeyDown = false;
-		keyDown = false;
-		this.numPlayers += 1;
 		// Whether or not the player is moving
 		moving = false;
 		right_pressed = false;
@@ -35,45 +34,43 @@ Crafty.c('Player1' , {
 	    	if(e.key == Crafty.keys.RIGHT_ARROW)
 	    	{
 	    		right_pressed = true;
-	    		// If the player is already moving to the left
-	    		if (moving === true) {
-	    			console.log("Here");
-	    			//Make the player animation stationary
-	    			this.animate('door1_standing_left', -1);
-	    			grass_sound.stop();
-	    			moving = false;
-	    		}
-	    		// If only the right key is pressed
-	    		else {
-		    		direction = 1;
-		    		if(isOpen == false)
-		    		{
+	    		if (isOpen == false) {
+		    		// If the player is already moving to the left
+		    		if (moving === true) {
+		    			//Make the player animation stationary
+		    			this.animate('door1_standing_left', -1);
+		    			grass_sound.stop();
+		    			moving = false;
+		    		}
+		    		// If only the right key is pressed
+		    		else {
+			    		direction = 1;
+		    			console.log("Right");
 		    			this.animate('door1_walking_right', -1);
 		    			grass_sound.play();
 		    			moving = true;
-		    		}
+			    	}
 		    	}
 	    	}
 	    	else if(e.key == Crafty.keys.LEFT_ARROW)
 	    	{
 	    		left_pressed = true;
-	    		// If the player is already moving to the right
-	    		if (moving === true) {
-	    			console.log("Here");
-	    			//Make the player animation stationary
-	    			this.animate('door1_standing_right', -1);
-	    			grass_sound.stop();
-	    			moving = false;
-	    		}
-	    		else {
-		    		direction = -1;
-		    		if(isOpen == false)
-		    		{
+	    		if (isOpen == false) {
+		    		// If the player is already moving to the right
+		    		if (moving === true) {
+		    			console.log("Here");
+		    			//Make the player animation stationary
+		    			this.animate('door1_standing_right', -1);
+		    			grass_sound.stop();
+		    			moving = false;
+		    		}
+		    		else {
+			    		direction = -1;
 		    			this.animate('door1_walking_left', -1);
 		    			grass_sound.play();
 		    			moving = true;
-		    		}
-		    	}
+			    	}
+			    }
 	    	}
 	    	if(e.key == Crafty.keys.DOWN_ARROW) 
 	    	{
@@ -111,6 +108,17 @@ Crafty.c('Player1' , {
 	    .bind('KeyUp', function(e) {
 		    if(e.key == Crafty.keys.DOWN_ARROW) {
 		        this.keyDown = false
+				// If the user is pressing the left key
+    			if (left_pressed == true && isOpen == false) {
+    				this.animate('door1_walking_left', -1);
+	    			grass_sound.play();
+	    			moving = true;
+    			}
+    			else if (right_pressed == true && isOpen == false) {
+    				this.animate('door1_walking_right', -1);
+	    			grass_sound.play();
+	    			moving = true;
+    			}
 		    }
 		    if (e.key == Crafty.keys.UP_ARROW) {
 		    	this.jumpKeyDown = false
@@ -156,8 +164,8 @@ Crafty.c('Player1' , {
 	    	//console.log("gravity = " + this._gy);
 	    	//console.log("falling = " + this._falling);
 			//Won't go offscreen
-			console.log("Moving = ");
-			console.log(moving);
+			//console.log("Moving = ");
+			//console.log(moving);
 			if (this.x > Crafty.viewport.width - this.w ||
 				this.x < 0){
 				this.x -= this._movement.x;
@@ -185,6 +193,7 @@ Crafty.c('Player1' , {
 	portalize: function() {
 		this.antigravity()
 		this.keyDown = false
+		//FUTURE REFERENCE GET RID OF OPEN, USE ISOPEN
 		this.open = true;
 		portalCount += 1;
 		door1AddressX = this.x;
@@ -213,29 +222,19 @@ Crafty.c('Player1' , {
 	},
 	// Stops the movement when player hits general solid stuff
 	stopMovement: function() {
-		//console.log(this._speed);
 		this._speed = 0;
 		if (this._movement) {
-			//console.log(this._movement.y);
 			this.x -= this._movement.x;
-			//if (this.jumpKeyDown)
-			this.y -= this._movement.y;
 		}
-		//this.y += 10;
 	},
 	// Stops the movement when the player hits the ground (so only when he jumps up into the ground)
 	stopJumpMovement: function() {
 		this._speed = 0;
 		if (this._movement) {
-			//console.log(this._movement.y);
-			//this.x -= this._movement.x;
-			//if (this.jumpKeyDown)
-			//Change the player's y position based off of their jump speed
-			//and the force of gravity
+			this.x += this._movement.x;
+			// If the player is falling, make sure they're falling according to gravity
 			if (this._falling)
-				this.y += this._gy;
-			else
-				this.y -= 1.5;//this._gy;
+				this.y += (this._gy);
 		}
 	}
 });

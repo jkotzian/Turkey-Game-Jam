@@ -48,9 +48,10 @@ Crafty.scene('Test', function() {
             }
         }
     }
-	
+    //This doesn't seem to work how i want it with incrementing inside the player object
+	numPlayers = 0;
     player1 = Crafty.e('Player1')
-		.attr({x: 300, y: 1000, playerNumber: 1})
+		.attr({x: 300, y: 1000})
 	//Insures Climbing platforms do not cause clipping
 	player1.antigravity();
 	player1.gravity();
