@@ -2,6 +2,12 @@
 <html>
   <head>
    	<meta charset="UTF-8"> 
+      <script src="src/howler.js"></script>
+      <script>
+        var door_open = new Howl({urls: ['src/audio/door_open.mp3']});
+        var door_closed = new Howl({urls: ['src/audio/door_closed.mp3']});
+        var grass_sound = new Howl({urls: ['src/audio/grass.mp3']});
+      </script>
     <script src="src/crafty.js"></script>
 	<script src="src/game.js"></script>
 	<script src="src/map.js"></script>
@@ -11,6 +17,7 @@
 	<script src="src/enemy.js"></script>
 	<script src="src/scenes.js"></script>
 	<script src="src/teddyBear.js"></script>
+	<script src="src/buttons.js"></script>
     <script>
 		window.addEventListener('load',Game.start);
     </script>
@@ -50,7 +57,7 @@
 	<div id="cr-stage"></div>
 	 
 	<p class="bottom">Created for the Turkey Jame Game Competition </a>.
-    <audio id="audioid" src="src/lana.mp3" preload="auto"> </audio>
+    <audio id="audioid" src="src/audio/scary.mp3" preload="auto"> </audio>
     <script>
     var sample = document.getElementById("audioid");
     sample.play();

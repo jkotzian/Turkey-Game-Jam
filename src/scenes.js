@@ -1,4 +1,3 @@
-
 numTeddy = 0;
 tile = 90;
 levelID = 1;
@@ -6,9 +5,22 @@ var player1;
 var player2;
 var boy;
 
-Crafty.scene('Start', function() {
+Crafty.c('Title', { 
+	speed: 3,
+	direction: 1,
+	init: function() 
+	{
+		this.requires('Actor, title')
+		.attr({x: 0, y: 0, w: Game.map_grid.tile.width * 20, h: Game.map_grid.tile.height * 20})
+	}
+});
+
+Crafty.scene('Start', function() 
+{
 	Crafty.e('StartScreen')
 		.attr({x: 300, y: 300})
+	Crafty.e('Title')
+		.attr({x:400,y:350})
 	this.bind('GoTo1', function() {
         Crafty.scene('Test');
     });
@@ -38,7 +50,7 @@ Crafty.scene('Test', function() {
     }
 	
     player1 = Crafty.e('Player1')
-		.attr({x: 300, y: 1000})
+		.attr({x: 300, y: 1000, playerNumber: 1})
 	//Insures Climbing platforms do not cause clipping
 	player1.antigravity();
 	player1.gravity();
@@ -70,6 +82,10 @@ Crafty.scene('Test', function() {
 });
 
 Crafty.scene('Level_1', function() {
+	open1_count = 0;
+	open2_count = 0;
+	isOpen = false;
+	isOpen2 = false;
 	numTeddy = 1;
 	 // A 2D array to keep track of all occupied tiles
     var w = Game.map_grid.width;
@@ -122,6 +138,10 @@ Crafty.scene('Level_1', function() {
 });
 
 Crafty.scene('Level_2', function() {
+	open1_count = 0;
+	open2_count = 0;
+	isOpen = false;
+	isOpen2 = false;
 	numTeddy = 3;
 	levelID = 2;
 	player1 = Crafty.e('Player1')
@@ -194,6 +214,10 @@ Crafty.scene('Level_2', function() {
 });
 
 Crafty.scene('Level_3', function() {
+	open1_count = 0;
+	open2_count = 0;
+	isOpen = false;
+	isOpen2 = false;
 	numTeddy = 2;
 	levelID = 3;
 	player1 = Crafty.e('Player1')
@@ -273,6 +297,10 @@ Crafty.scene('Level_3', function() {
 });
 
 Crafty.scene('Level_4', function() {
+	open1_count = 0;
+	open2_count = 0;
+	isOpen = false;
+	isOpen2 = false;
 	numTeddy = 3;
 	levelID = 4;
     var w = Game.map_grid.width;
@@ -349,6 +377,10 @@ Crafty.scene('Level_4', function() {
 });
 
 Crafty.scene('Level_5', function() {
+	open1_count = 0;
+	open2_count = 0;
+	isOpen = false;
+	isOpen2 = false;
 	numTeddy = 3;
 	levelID = 5;
     var w = Game.map_grid.width;
@@ -474,6 +506,10 @@ Crafty.scene('Level_5', function() {
 // })
 
 Crafty.scene('Level_7', function() {
+	open1_count = 0;
+	open2_count = 0;
+	isOpen = false;
+	isOpen2 = false;
     levelID = 7;
     var w = Game.map_grid.width;
     var h = Game.map_grid.height;

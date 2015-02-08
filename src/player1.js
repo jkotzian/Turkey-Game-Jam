@@ -1,4 +1,5 @@
 portalCount = 0;
+var keys1 = [];
 
 //Holds the address of the door for 
 //teleportations to occur
@@ -6,11 +7,16 @@ door1AddressX = 0;
 door1AddressY = 0;
 
 Crafty.c('Player1' , {
-	keyDown: false,
-	jumpKeyDown: false,
-	open: false,
 	init: function() {
+		direction = 1;
+		open = false;
+		jumpKeyDown = false;
+		keyDown = false;
 		this.numPlayers += 1;
+		// Whether or not the player is moving
+		moving = false;
+		right_pressed = false;
+		left_pressed = false;
 		this.requires('Actor, door1, Twoway, Gravity, Collision, Player, SpriteAnimation')
 		.attr({x: 0, y: 0, w: Game.map_grid.tile.width, h: Game.map_grid.tile.height * 1.8})
 		.twoway(10)
@@ -24,26 +30,83 @@ Crafty.c('Player1' , {
 		.gravityConst(.7)
 		.stopOnSolids()
 		.stopOnBox()
-		.bind('KeyDown', function(e) {
-		    if(e.key == Crafty.keys.DOWN_ARROW) {
-		        this.keyDown = true;
-		        this.animate('door1_open', -1);
+	    .bind('KeyDown', function(e)
+	    {
+	    	if(e.key == Crafty.keys.RIGHT_ARROW)
+	    	{
+	    		right_pressed = true;
+	    		// If the player is already moving to the left
+	    		if (moving === true) {
+	    			console.log("Here");
+	    			//Make the player animation stationary
+	    			this.animate('door1_standing_left', -1);
+	    			grass_sound.stop();
+	    			moving = false;
+	    		}
+	    		// If only the right key is pressed
+	    		else {
+		    		direction = 1;
+		    		if(isOpen == false)
+		    		{
+		    			this.animate('door1_walking_right', -1);
+		    			grass_sound.play();
+		    			moving = true;
+		    		}
+		    	}
+	    	}
+	    	else if(e.key == Crafty.keys.LEFT_ARROW)
+	    	{
+	    		left_pressed = true;
+	    		// If the player is already moving to the right
+	    		if (moving === true) {
+	    			console.log("Here");
+	    			//Make the player animation stationary
+	    			this.animate('door1_standing_right', -1);
+	    			grass_sound.stop();
+	    			moving = false;
+	    		}
+	    		else {
+		    		direction = -1;
+		    		if(isOpen == false)
+		    		{
+		    			this.animate('door1_walking_left', -1);
+		    			grass_sound.play();
+		    			moving = true;
+		    		}
+		    	}
+	    	}
+	    	if(e.key == Crafty.keys.DOWN_ARROW) 
+	    	{
+		    	this.keyDown = true;
+		        ++open1_count;
+		        if((open1_count % 2 == 1) && isOpen == false)
+		        {
+		        	door_open.play();
+		        	door_closed.stop();
+		        	isOpen = true;
+		        	this.animate('door1_open', -1);
+		        }
+		        else
+		        {
+		        	door_closed.play();
+		        	door_open.stop();
+		        	isOpen = false;
+		        	if (direction === -1) {
+		        		this.animate('door1_standing_left', -1);
+		        	}
+		        	else if (direction === 1) {
+		        		this.animate('door1_standing_right', -1);
+		        	}
+		        }
 		    }
-		    if (e.key == Crafty.keys.UP_ARROW) {
-		    	this.jumpKeyDown = true
-		    }
-		    if (e.key == Crafty.keys.R) {
+		   	if(e.key == Crafty.keys.UP_ARROW) {
+	    		grass_sound.stop();
+	    	}
+	    	if (e.key == Crafty.keys.R) 
+		    {
 				console.log("R")
 		    	boy.boyDie()
 		    }
-		   	if(e.key == Crafty.keys.RIGHT_ARROW)
-	    	{
-	    		this.animate('door1_walking_right', -1);
-	    	}
-	    	if(e.key == Crafty.keys.LEFT_ARROW)
-	    	{
-	    		this.animate('door1_walking_left', -1);
-	    	}
 	    })
 	    .bind('KeyUp', function(e) {
 		    if(e.key == Crafty.keys.DOWN_ARROW) {
@@ -54,18 +117,47 @@ Crafty.c('Player1' , {
 		    }
 		   	if(e.key == Crafty.keys.RIGHT_ARROW)
 	    	{
-	    		this.animate('door1_standing_right', -1);
+	    		right_pressed = false;
+	    		if(isOpen == false)
+	    		{
+	    			// If the user is pressing the left key
+	    			if (left_pressed === true) {
+	    				this.animate('door1_walking_left', -1);
+		    			grass_sound.play();
+		    			moving = true;
+	    			}
+	    			else {
+		    			this.animate('door1_standing_right', -1);
+		    			grass_sound.stop();
+		    			moving = false;
+		    		}
+	    		}
 	    	}
 	    	if(e.key == Crafty.keys.LEFT_ARROW)
 	    	{
-	    		this.animate('door1_standing_left', -1);
+	    		left_pressed = false;
+	    		if(isOpen == false)
+	    		{
+	    			if (right_pressed === true) {
+	    				this.animate('door1_walking_right', -1);
+		    			grass_sound.play();
+		    			moving = true;
+	    			}
+	    			else {
+		    			this.animate('door1_standing_left', -1);
+		    			grass_sound.stop();
+		    			moving = false;
+		    		}
+	    		}
 	    	}
 	    })
 	    .bind('EnterFrame', function(frame) {
 	    	//console.log("jumpspeed = " + this._jumpSpeed);
-	    	console.log("gravity = " + this._gy);
+	    	//console.log("gravity = " + this._gy);
 	    	//console.log("falling = " + this._falling);
 			//Won't go offscreen
+			console.log("Moving = ");
+			console.log(moving);
 			if (this.x > Crafty.viewport.width - this.w ||
 				this.x < 0){
 				this.x -= this._movement.x;
@@ -143,7 +235,7 @@ Crafty.c('Player1' , {
 			if (this._falling)
 				this.y += this._gy;
 			else
-				this.y -= this._gy;
+				this.y -= 1.5;//this._gy;
 		}
 	}
 });
