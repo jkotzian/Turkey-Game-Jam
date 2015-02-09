@@ -22,7 +22,7 @@ Crafty.scene('Start', function()
 	Crafty.e('Title')
 		.attr({x:400,y:350})
 	this.bind('GoTo1', function() {
-        Crafty.scene('Test');
+        Crafty.scene('Level_1');
     });
 });
 
